@@ -5,6 +5,31 @@ export interface FormData {
   experienceLevel: string;
   location: string;
   
+  // 個人の特徴・アイデンティティ
+  personalityTraits?: string[];
+  strengths?: string;
+  weaknesses?: string;
+  roleModel?: string;
+  selfDescription?: string;
+  
+  // 背景・経歴・人生経験
+  educationLevel?: string;
+  majorField?: string;
+  customMajorField?: string;
+  careerStage?: string;
+  careerTransition?: string;
+  majorAchievement?: string;
+  learningFromFailure?: string;
+  lifeChangingEvent?: string;
+  
+  // 価値観・信念
+  coreValues?: string[];
+  workPriorities?: string[];
+  decisionStyle?: string;
+  avoidanceFactors?: string;
+  idealWorkStyle?: string;
+  socialContribution?: string;
+  
   // 専門分野
   skills: string[];
   customSkills?: string;
@@ -25,6 +50,13 @@ export interface FormData {
   // 学習・思考スタイル
   learningStyle: string;
   thinkingStyle: string;
+  
+  // コンテキスト理解強化
+  professionalTerms?: string;
+  assumedKnowledge?: string;
+  noExplanationNeeded?: string;
+  detailedInterest?: string;
+  preferredExamples?: string;
   
   // その他
   interests: string[];

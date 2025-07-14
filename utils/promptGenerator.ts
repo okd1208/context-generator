@@ -16,6 +16,79 @@ export function generatePrompt(data: FormData, mode: 'simple' | 'detailed' = 'de
     sections.push(`**専門分野・スキル**: ${skillsText}`);
   }
   
+  // 個人の特徴・アイデンティティ
+  const identityTexts: string[] = [];
+  if (!data.excludedFields.includes('personalityTraits') && data.personalityTraits && data.personalityTraits.length > 0) {
+    identityTexts.push(`性格的特徴: ${data.personalityTraits.join(', ')}`);
+  }
+  if (!data.excludedFields.includes('strengths') && data.strengths) {
+    identityTexts.push(`主な強み: ${data.strengths}`);
+  }
+  if (!data.excludedFields.includes('weaknesses') && data.weaknesses) {
+    identityTexts.push(`改善したい点: ${data.weaknesses}`);
+  }
+  if (!data.excludedFields.includes('roleModel') && data.roleModel) {
+    identityTexts.push(`ロールモデル: ${data.roleModel}`);
+  }
+  if (!data.excludedFields.includes('selfDescription') && data.selfDescription) {
+    identityTexts.push(`自己紹介: ${data.selfDescription}`);
+  }
+  if (identityTexts.length > 0) {
+    sections.push(`**個人の特徴**\n- ${identityTexts.join('\n- ')}`);
+  }
+  
+  // 背景・経歴・人生経験
+  const backgroundTexts: string[] = [];
+  if (!data.excludedFields.includes('educationLevel') && data.educationLevel) {
+    backgroundTexts.push(`学歴: ${data.educationLevel}`);
+  }
+  if (!data.excludedFields.includes('majorField') && data.majorField) {
+    const majorText = data.customMajorField || data.majorField;
+    backgroundTexts.push(`専攻分野: ${majorText}`);
+  }
+  if (!data.excludedFields.includes('careerStage') && data.careerStage) {
+    backgroundTexts.push(`キャリアステージ: ${data.careerStage}`);
+  }
+  if (mode === 'detailed' && !data.excludedFields.includes('careerTransition') && data.careerTransition) {
+    backgroundTexts.push(`キャリアの変遷: ${data.careerTransition}`);
+  }
+  if (mode === 'detailed' && !data.excludedFields.includes('majorAchievement') && data.majorAchievement) {
+    backgroundTexts.push(`主要な成果: ${data.majorAchievement}`);
+  }
+  if (mode === 'detailed' && !data.excludedFields.includes('learningFromFailure') && data.learningFromFailure) {
+    backgroundTexts.push(`失敗から学んだ教訓: ${data.learningFromFailure}`);
+  }
+  if (mode === 'detailed' && !data.excludedFields.includes('lifeChangingEvent') && data.lifeChangingEvent) {
+    backgroundTexts.push(`人生に影響を与えた出来事: ${data.lifeChangingEvent}`);
+  }
+  if (backgroundTexts.length > 0) {
+    sections.push(`**背景・経歴**\n- ${backgroundTexts.join('\n- ')}`);
+  }
+  
+  // 価値観・信念
+  const valuesTexts: string[] = [];
+  if (!data.excludedFields.includes('coreValues') && data.coreValues && data.coreValues.length > 0) {
+    valuesTexts.push(`大切にしている価値観: ${data.coreValues.join(', ')}`);
+  }
+  if (!data.excludedFields.includes('workPriorities') && data.workPriorities && data.workPriorities.length > 0) {
+    valuesTexts.push(`仕事で重視すること: ${data.workPriorities.join(', ')}`);
+  }
+  if (mode === 'detailed' && !data.excludedFields.includes('decisionStyle') && data.decisionStyle) {
+    valuesTexts.push(`意思決定スタイル: ${data.decisionStyle}`);
+  }
+  if (mode === 'detailed' && !data.excludedFields.includes('avoidanceFactors') && data.avoidanceFactors) {
+    valuesTexts.push(`避けたいこと: ${data.avoidanceFactors}`);
+  }
+  if (mode === 'detailed' && !data.excludedFields.includes('idealWorkStyle') && data.idealWorkStyle) {
+    valuesTexts.push(`理想の働き方: ${data.idealWorkStyle}`);
+  }
+  if (mode === 'detailed' && !data.excludedFields.includes('socialContribution') && data.socialContribution) {
+    valuesTexts.push(`社会貢献に対する考え: ${data.socialContribution}`);
+  }
+  if (valuesTexts.length > 0) {
+    sections.push(`**価値観・信念**\n- ${valuesTexts.join('\n- ')}`);
+  }
+  
   // エンジニア関連情報
   if (data.isEngineer && !data.excludedFields.includes('isEngineer')) {
     const engineerSections: string[] = [];
@@ -81,6 +154,29 @@ export function generatePrompt(data: FormData, mode: 'simple' | 'detailed' = 'de
     sections.push(`**作業環境・好み**: ${data.workEnvironment}`);
   }
   
+  // コンテキスト理解強化（詳細モードのみ）
+  if (mode === 'detailed') {
+    const contextTexts: string[] = [];
+    if (!data.excludedFields.includes('professionalTerms') && data.professionalTerms) {
+      contextTexts.push(`よく使う専門用語: ${data.professionalTerms}`);
+    }
+    if (!data.excludedFields.includes('assumedKnowledge') && data.assumedKnowledge) {
+      contextTexts.push(`前提知識: ${data.assumedKnowledge}`);
+    }
+    if (!data.excludedFields.includes('noExplanationNeeded') && data.noExplanationNeeded) {
+      contextTexts.push(`説明不要な概念: ${data.noExplanationNeeded}`);
+    }
+    if (!data.excludedFields.includes('detailedInterest') && data.detailedInterest) {
+      contextTexts.push(`詳しく知りたい分野: ${data.detailedInterest}`);
+    }
+    if (!data.excludedFields.includes('preferredExamples') && data.preferredExamples) {
+      contextTexts.push(`理解しやすい例: ${data.preferredExamples}`);
+    }
+    if (contextTexts.length > 0) {
+      sections.push(`**コンテキスト情報**\n- ${contextTexts.join('\n- ')}`);
+    }
+  }
+  
   // 利用目的
   if (!data.excludedFields.includes('purposes') && data.purposes.length > 0) {
     sections.push(`**利用目的**: ${data.purposes.join(', ')}`);
@@ -144,6 +240,30 @@ function generateJsonFormat(data: FormData): string {
       experience_level: data.experienceLevel,
       location: data.includePersonalInfo ? data.location : undefined
     },
+    identity: {
+      personality_traits: data.personalityTraits,
+      strengths: data.strengths,
+      weaknesses: data.weaknesses,
+      role_model: data.roleModel,
+      self_description: data.selfDescription
+    },
+    background: {
+      education_level: data.educationLevel,
+      major_field: data.customMajorField || data.majorField,
+      career_stage: data.careerStage,
+      career_transition: data.careerTransition,
+      major_achievement: data.majorAchievement,
+      learning_from_failure: data.learningFromFailure,
+      life_changing_event: data.lifeChangingEvent
+    },
+    values: {
+      core_values: data.coreValues,
+      work_priorities: data.workPriorities,
+      decision_style: data.decisionStyle,
+      avoidance_factors: data.avoidanceFactors,
+      ideal_work_style: data.idealWorkStyle,
+      social_contribution: data.socialContribution
+    },
     skills: [...data.skills, data.customSkills].filter(Boolean),
     engineering: data.isEngineer ? {
       programming_languages: data.programmingLanguages,
@@ -160,6 +280,13 @@ function generateJsonFormat(data: FormData): string {
       learning_style: data.learningStyle,
       thinking_style: data.thinkingStyle,
       mbti_type: data.mbtiType
+    },
+    context_enhancement: {
+      professional_terms: data.professionalTerms,
+      assumed_knowledge: data.assumedKnowledge,
+      no_explanation_needed: data.noExplanationNeeded,
+      detailed_interest: data.detailedInterest,
+      preferred_examples: data.preferredExamples
     },
     interests: data.interests,
     work_environment: data.workEnvironment,
