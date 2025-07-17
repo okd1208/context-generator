@@ -9,7 +9,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 
 export const Button: React.FC<ButtonProps> = ({
   variant = 'primary',
-  size = 'md',
+  size = 'sm',
   className,
   children,
   ...props
@@ -22,9 +22,9 @@ export const Button: React.FC<ButtonProps> = ({
           'btn-primary': variant === 'primary',
           'btn-secondary': variant === 'secondary',
           'border border-gray-300 bg-white text-gray-700 hover:bg-gray-50 focus:ring-gray-500': variant === 'outline',
-          'px-3 py-2 text-sm': size === 'sm',
-          'px-4 py-2 text-base': size === 'md',
-          'px-6 py-3 text-lg': size === 'lg',
+          'px-2.5 py-1.5 text-xs': size === 'sm',
+          'px-3 py-2 text-sm': size === 'md',
+          'px-4 py-2.5 text-base': size === 'lg',
         },
         className
       )}
@@ -214,16 +214,16 @@ export const MultiSelect: React.FC<MultiSelectProps> = ({
     <div className="space-y-1">
       {label && <label className="field-label">{label}</label>}
       <div className="space-y-2">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-2 max-h-48 overflow-y-auto border border-gray-300 rounded-lg p-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 max-h-40 overflow-y-auto border border-gray-300 rounded-lg p-2.5">
           {options.map((option) => (
-            <label key={option.value} className="flex items-center space-x-2 cursor-pointer">
+            <label key={option.value} className="flex items-center space-x-1.5 cursor-pointer">
               <input
                 type="checkbox"
                 checked={value.includes(option.value)}
                 onChange={() => toggleOption(option.value)}
                 className="form-checkbox"
               />
-              <span className="text-sm text-gray-700">{option.label}</span>
+              <span className="text-xs text-gray-700">{option.label}</span>
             </label>
           ))}
         </div>
@@ -234,13 +234,13 @@ export const MultiSelect: React.FC<MultiSelectProps> = ({
               return option ? (
                 <span
                   key={selectedValue}
-                  className="inline-flex items-center px-2 py-1 rounded-md text-xs font-medium bg-primary-100 text-primary-800"
+                  className="inline-flex items-center px-1.5 py-0.5 rounded text-xs font-medium bg-primary-100 text-primary-800"
                 >
                   {option.label}
                   <button
                     type="button"
                     onClick={() => toggleOption(selectedValue)}
-                    className="ml-1 text-primary-600 hover:text-primary-800"
+                    className="ml-1 text-primary-600 hover:text-primary-800 text-xs"
                   >
                     ×
                   </button>
@@ -285,13 +285,13 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
 
   return (
     <div className={clsx('w-full', className)}>
-      <div className="flex justify-between text-sm text-gray-600 mb-1">
+      <div className="flex justify-between text-xs text-gray-600 mb-0.5">
         <span>進捗</span>
         <span>{percentage}%</span>
       </div>
-      <div className="w-full bg-gray-200 rounded-full h-2">
+      <div className="w-full bg-gray-200 rounded-full h-1.5">
         <div
-          className="bg-primary-600 h-2 rounded-full transition-all duration-300"
+          className="bg-primary-600 h-1.5 rounded-full transition-all duration-300"
           style={{ width: `${percentage}%` }}
         />
       </div>

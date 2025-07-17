@@ -206,32 +206,33 @@ export const ContextForm: React.FC<ContextFormProps> = ({
   }, [currentSectionIndex]);
 
   return (
-    <div className="max-w-4xl mx-auto space-y-6">
+    <div className="max-w-4xl mx-auto space-y-3 sm:space-y-4">
       {/* ヘッダー */}
       <div className="flex items-center justify-between">
-        <Button variant="outline" onClick={handleBackToModeSelection} className="flex items-center space-x-2">
-          <ChevronLeft className="w-4 h-4" />
+        <Button variant="outline" onClick={handleBackToModeSelection} className="flex items-center space-x-1.5">
+          <ChevronLeft className="w-3 h-3" />
           <span>モード選択に戻る</span>
         </Button>
-        <div className="text-sm text-gray-600">
+        <div className="text-xs text-gray-600">
           {mode === 'simple' ? '簡易コンテキスト' : '詳細コンテキスト'}
         </div>
         <Button
           variant="outline"
           size="sm"
           onClick={() => setShowPrivacySettings(!showPrivacySettings)}
-          className="flex items-center space-x-2"
+          className="flex items-center space-x-1.5"
         >
-          <Settings className="w-4 h-4" />
-          <span>プライバシー設定</span>
+          <Settings className="w-3 h-3" />
+          <span className="hidden sm:inline">プライバシー設定</span>
+          <span className="sm:hidden">設定</span>
         </Button>
       </div>
 
       {/* プライバシー設定 */}
       {showPrivacySettings && (
-        <Card className="bg-blue-50 border-blue-200">
-          <h3 className="text-lg font-semibold text-blue-900 mb-3">プライバシー設定</h3>
-          <div className="space-y-3">
+        <Card className="bg-blue-50 border-blue-200 p-3">
+          <h3 className="text-base font-semibold text-blue-900 mb-2">プライバシー設定</h3>
+          <div className="space-y-2">
             <label className="flex items-center space-x-2">
               <input
                 type="checkbox"
@@ -239,21 +240,21 @@ export const ContextForm: React.FC<ContextFormProps> = ({
                 onChange={(e) => setValue('includePersonalInfo', e.target.checked)}
                 className="form-checkbox"
               />
-              <span className="text-sm text-blue-800">
+              <span className="text-xs text-blue-800">
                 個人情報（地域など）をコンテキストに含める
               </span>
             </label>
-            <p className="text-xs text-blue-700">
+            <p className="text-xs text-blue-700 leading-relaxed">
               各項目の横にある👁️アイコンをクリックすることで、個別に項目をコンテキストから除外できます。
             </p>
             {excludedFields.length > 0 && (
               <div>
-                <p className="text-sm font-medium text-blue-800 mb-2">除外される項目:</p>
-                <div className="flex flex-wrap gap-1">
+                <p className="text-xs font-medium text-blue-800 mb-1">除外される項目:</p>
+                <div className="flex flex-wrap gap-0.5">
                   {excludedFields.map(fieldId => (
                     <span
                       key={fieldId}
-                      className="inline-flex items-center px-2 py-1 rounded text-xs bg-blue-200 text-blue-800"
+                      className="inline-flex items-center px-1.5 py-0.5 rounded text-xs bg-blue-200 text-blue-800"
                     >
                       {fieldId}
                     </span>
@@ -273,7 +274,7 @@ export const ContextForm: React.FC<ContextFormProps> = ({
 
       {/* フォームセクション */}
       <Card>
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           {currentSection && (
             <FormSection
               section={currentSection}
@@ -289,35 +290,35 @@ export const ContextForm: React.FC<ContextFormProps> = ({
           )}
 
           {/* ナビゲーションボタン */}
-          <div className="flex justify-between pt-6 border-t">
+          <div className="flex justify-between pt-4 border-t">
             <Button
               type="button"
               variant="outline"
               onClick={handlePrevious}
               disabled={currentSectionIndex === 0}
-              className="flex items-center space-x-2"
+              className="flex items-center space-x-1.5"
             >
-              <ChevronLeft className="w-4 h-4" />
+              <ChevronLeft className="w-3 h-3" />
               <span>前へ</span>
             </Button>
 
-            <div className="text-sm text-gray-500">
+            <div className="text-xs text-gray-500">
               {currentSectionIndex + 1} / {visibleSections.length}
             </div>
 
             {isLastSection ? (
-              <Button type="submit" className="flex items-center space-x-2">
+              <Button type="submit" className="flex items-center space-x-1.5">
                 <span>コンテキストを生成</span>
-                <ChevronRight className="w-4 h-4" />
+                <ChevronRight className="w-3 h-3" />
               </Button>
             ) : (
               <Button
                 type="button"
                 onClick={handleNext}
-                className="flex items-center space-x-2"
+                className="flex items-center space-x-1.5"
               >
                 <span>次へ</span>
-                <ChevronRight className="w-4 h-4" />
+                <ChevronRight className="w-3 h-3" />
               </Button>
             )}
           </div>
@@ -325,9 +326,9 @@ export const ContextForm: React.FC<ContextFormProps> = ({
       </Card>
 
       {/* ヒント */}
-      <Card className="bg-gray-50">
-        <h4 className="font-medium text-gray-900 mb-2">💡 ヒント</h4>
-        <ul className="text-sm text-gray-600 space-y-1">
+      <Card className="bg-gray-50 p-3">
+        <h4 className="font-medium text-gray-900 mb-1.5 text-sm">💡 ヒント</h4>
+        <ul className="text-xs text-gray-600 space-y-0.5 leading-relaxed">
           <li>• 項目は空欄でも構いません。入力した内容に基づいてコンテキストが生成されます</li>
           <li>• エンジニアにチェックを入れると、技術関連の詳細な質問が追加されます</li>
           <li>• プライバシー設定で個人情報の含有をコントロールできます</li>
