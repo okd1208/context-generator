@@ -208,23 +208,32 @@ export const ContextForm: React.FC<ContextFormProps> = ({
   return (
     <div className="max-w-4xl mx-auto space-y-6">
       {/* ヘッダー */}
-      <div className="flex items-center justify-between">
-        <Button variant="outline" onClick={handleBackToModeSelection} className="flex items-center space-x-2">
-          <ChevronLeft className="w-4 h-4" />
-          <span>モード選択に戻る</span>
-        </Button>
-        <div className="text-sm text-gray-600">
-          {mode === 'simple' ? '簡易コンテキスト' : '詳細コンテキスト'}
+      <div className="space-y-2">
+        <div className="flex items-center justify-between">
+          <Button 
+            variant="outline" 
+            size="sm"
+            onClick={handleBackToModeSelection} 
+            className="flex items-center space-x-2"
+          >
+            <ChevronLeft className="w-4 h-4" />
+            <span>トップに戻る</span>
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => setShowPrivacySettings(!showPrivacySettings)}
+            className="flex items-center space-x-2"
+          >
+            <Settings className="w-4 h-4" />
+            <span>プライバシー設定</span>
+          </Button>
         </div>
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => setShowPrivacySettings(!showPrivacySettings)}
-          className="flex items-center space-x-2"
-        >
-          <Settings className="w-4 h-4" />
-          <span>プライバシー設定</span>
-        </Button>
+        <div className="text-center">
+          <div className="text-sm text-gray-600 font-medium">
+            {mode === 'simple' ? '簡易コンテキスト' : '詳細コンテキスト'}
+          </div>
+        </div>
       </div>
 
       {/* プライバシー設定 */}
