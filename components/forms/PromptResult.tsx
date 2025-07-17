@@ -65,22 +65,22 @@ export const PromptResult: React.FC<PromptResultProps> = ({
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-3 sm:space-y-4">
       <div className="text-center">
-        <h2 className="text-2xl font-bold text-gray-900 mb-2">
+        <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-1">
           コンテキスト生成完了！
         </h2>
-        <p className="text-gray-600">
+        <p className="text-sm text-gray-600">
           以下のプロンプトをコピーしてAIサービスで使用してください
         </p>
       </div>
 
       {/* タブ */}
       <div className="flex justify-center">
-        <div className="flex bg-gray-100 rounded-lg p-1">
+        <div className="flex bg-gray-100 rounded-lg p-0.5">
           <button
             onClick={() => setActiveTab('basic')}
-            className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${
+            className={`px-3 py-1.5 text-xs font-medium rounded transition-colors ${
               activeTab === 'basic'
                 ? 'bg-white text-gray-900 shadow-sm'
                 : 'text-gray-600 hover:text-gray-900'
@@ -90,7 +90,7 @@ export const PromptResult: React.FC<PromptResultProps> = ({
           </button>
           <button
             onClick={() => setActiveTab('detailed')}
-            className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${
+            className={`px-3 py-1.5 text-xs font-medium rounded transition-colors ${
               activeTab === 'detailed'
                 ? 'bg-white text-gray-900 shadow-sm'
                 : 'text-gray-600 hover:text-gray-900'
@@ -100,7 +100,7 @@ export const PromptResult: React.FC<PromptResultProps> = ({
           </button>
           <button
             onClick={() => setActiveTab('json')}
-            className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${
+            className={`px-3 py-1.5 text-xs font-medium rounded transition-colors ${
               activeTab === 'json'
                 ? 'bg-white text-gray-900 shadow-sm'
                 : 'text-gray-600 hover:text-gray-900'
@@ -113,13 +113,13 @@ export const PromptResult: React.FC<PromptResultProps> = ({
 
       {/* プロンプト表示 */}
       <Card className="relative">
-        <div className="flex justify-between items-start mb-4">
-          <h3 className="text-lg font-semibold text-gray-900">
+        <div className="flex justify-between items-start mb-3">
+          <h3 className="text-base font-semibold text-gray-900">
             {activeTab === 'basic' && '簡易版プロンプト'}
             {activeTab === 'detailed' && '詳細版プロンプト'}
             {activeTab === 'json' && 'JSON形式（API用）'}
           </h3>
-          <div className="flex space-x-2">
+          <div className="flex space-x-1.5">
             <Button
               variant="outline"
               size="sm"
@@ -127,11 +127,11 @@ export const PromptResult: React.FC<PromptResultProps> = ({
               className="flex items-center space-x-1"
             >
               {copiedField === activeTab ? (
-                <Check className="w-4 h-4 text-green-600" />
+                <Check className="w-3 h-3 text-green-600" />
               ) : (
-                <Copy className="w-4 h-4" />
+                <Copy className="w-3 h-3" />
               )}
-              <span>{copiedField === activeTab ? 'コピー済み' : 'コピー'}</span>
+              <span className="hidden sm:inline">{copiedField === activeTab ? 'コピー済み' : 'コピー'}</span>
             </Button>
             <Button
               variant="outline"
@@ -139,37 +139,37 @@ export const PromptResult: React.FC<PromptResultProps> = ({
               onClick={() => handleDownload(getCurrentContent(), getCurrentFilename())}
               className="flex items-center space-x-1"
             >
-              <Download className="w-4 h-4" />
-              <span>ダウンロード</span>
+              <Download className="w-3 h-3" />
+              <span className="hidden sm:inline">ダウンロード</span>
             </Button>
           </div>
         </div>
 
         <div className="relative">
-          <pre className="bg-gray-50 rounded-lg p-4 text-sm text-gray-800 whitespace-pre-wrap overflow-x-auto max-h-96 overflow-y-auto border">
+          <pre className="bg-gray-50 rounded-lg p-3 text-xs text-gray-800 whitespace-pre-wrap overflow-x-auto max-h-80 overflow-y-auto border">
             {getCurrentContent()}
           </pre>
         </div>
 
         {activeTab === 'basic' && (
-          <div className="mt-4 p-3 bg-blue-50 rounded-lg">
-            <p className="text-sm text-blue-800">
+          <div className="mt-2 p-2 bg-blue-50 rounded-lg">
+            <p className="text-xs text-blue-800">
               💡 簡易版は短くて使いやすいプロンプトです。ChatGPTやClaude等で手軽に使用できます。
             </p>
           </div>
         )}
 
         {activeTab === 'detailed' && (
-          <div className="mt-4 p-3 bg-green-50 rounded-lg">
-            <p className="text-sm text-green-800">
+          <div className="mt-2 p-2 bg-green-50 rounded-lg">
+            <p className="text-xs text-green-800">
               💡 詳細版はより具体的で高品質な回答を得られるプロンプトです。重要な会話や専門的な質問におすすめです。
             </p>
           </div>
         )}
 
         {activeTab === 'json' && (
-          <div className="mt-4 p-3 bg-purple-50 rounded-lg">
-            <p className="text-sm text-purple-800">
+          <div className="mt-2 p-2 bg-purple-50 rounded-lg">
+            <p className="text-xs text-purple-800">
               💡 JSON形式はAPI連携や開発用途に使用できます。プログラムから扱いやすい構造化データです。
             </p>
           </div>
@@ -177,44 +177,44 @@ export const PromptResult: React.FC<PromptResultProps> = ({
       </Card>
 
       {/* 使用例 */}
-      <Card>
-        <h3 className="text-lg font-semibold text-gray-900 mb-3">使用方法</h3>
-        <div className="space-y-3">
-          <div className="flex items-start space-x-3">
-            <div className="flex-shrink-0 w-6 h-6 bg-primary-600 text-white rounded-full flex items-center justify-center text-sm font-medium">
+      <Card className="p-3">
+        <h3 className="text-base font-semibold text-gray-900 mb-2">使用方法</h3>
+        <div className="space-y-2">
+          <div className="flex items-start space-x-2">
+            <div className="flex-shrink-0 w-5 h-5 bg-primary-600 text-white rounded-full flex items-center justify-center text-xs font-medium">
               1
             </div>
-            <p className="text-gray-700">上記のプロンプトをコピーします</p>
+            <p className="text-xs text-gray-700">上記のプロンプトをコピーします</p>
           </div>
-          <div className="flex items-start space-x-3">
-            <div className="flex-shrink-0 w-6 h-6 bg-primary-600 text-white rounded-full flex items-center justify-center text-sm font-medium">
+          <div className="flex items-start space-x-2">
+            <div className="flex-shrink-0 w-5 h-5 bg-primary-600 text-white rounded-full flex items-center justify-center text-xs font-medium">
               2
             </div>
-            <p className="text-gray-700">ChatGPT、Claude、Gemini等のAIサービスにアクセスします</p>
+            <p className="text-xs text-gray-700">ChatGPT、Claude、Gemini等のAIサービスにアクセスします</p>
           </div>
-          <div className="flex items-start space-x-3">
-            <div className="flex-shrink-0 w-6 h-6 bg-primary-600 text-white rounded-full flex items-center justify-center text-sm font-medium">
+          <div className="flex items-start space-x-2">
+            <div className="flex-shrink-0 w-5 h-5 bg-primary-600 text-white rounded-full flex items-center justify-center text-xs font-medium">
               3
             </div>
-            <p className="text-gray-700">会話の最初にプロンプトを貼り付けて送信します</p>
+            <p className="text-xs text-gray-700">会話の最初にプロンプトを貼り付けて送信します</p>
           </div>
-          <div className="flex items-start space-x-3">
-            <div className="flex-shrink-0 w-6 h-6 bg-primary-600 text-white rounded-full flex items-center justify-center text-sm font-medium">
+          <div className="flex items-start space-x-2">
+            <div className="flex-shrink-0 w-5 h-5 bg-primary-600 text-white rounded-full flex items-center justify-center text-xs font-medium">
               4
             </div>
-            <p className="text-gray-700">その後、通常通り質問や会話を続けてください</p>
+            <p className="text-xs text-gray-700">その後、通常通り質問や会話を続けてください</p>
           </div>
         </div>
       </Card>
 
       {/* アクションボタン */}
-      <div className="flex justify-center space-x-4">
-        <Button variant="outline" onClick={onEdit} className="flex items-center space-x-2">
-          <RefreshCw className="w-4 h-4" />
+      <div className="flex justify-center space-x-3">
+        <Button variant="outline" onClick={onEdit} className="flex items-center space-x-1.5">
+          <RefreshCw className="w-3 h-3" />
           <span>内容を編集</span>
         </Button>
-        <Button onClick={onReset} className="flex items-center space-x-2">
-          <RefreshCw className="w-4 h-4" />
+        <Button onClick={onReset} className="flex items-center space-x-1.5">
+          <RefreshCw className="w-3 h-3" />
           <span>新しくコンテキストを作成</span>
         </Button>
       </div>
