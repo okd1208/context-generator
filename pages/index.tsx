@@ -47,6 +47,7 @@ export default function Home() {
     <>
       <Head>
         <title>AIコンテキスト生成ツール - あなた専用のプロンプトを作成</title>
+        <meta name="google-site-verification" content="9NSi-fDNw_Cwb_QJ_H2NvHxbIy9hsv-HUaEYCNKOFmI" />
         <meta
           name="description"
           content="フォーム入力だけで、あなたの背景に最適化されたAI用プロンプトを生成。ChatGPT、Claude、Gemini等で使用可能。"
