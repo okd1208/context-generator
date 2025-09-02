@@ -3,6 +3,7 @@
 const { spawn } = require('child_process');
 const fs = require('fs');
 const path = require('path');
+require('ts-node').register({ transpileOnly: true });
 
 // カラーコード
 const colors = {
@@ -183,6 +184,49 @@ async function testPromptGeneratorImport() {
   }
 }
 
+// copyToClipboard のエラーハンドリングを確認
+async function testClipboardFallback() {
+  log('📋 クリップボードコピーのエラーハンドリングチェック...', 'blue');
+
+  // モダンAPIが失敗する状況をシミュレート
+  global.window = { isSecureContext: true };
+  global.navigator = {
+    clipboard: {
+      writeText: () => Promise.reject(new Error('denied'))
+    }
+  };
+  // フォールバックで使用する最小限の document をモック
+  global.document = {
+    createElement: () => ({
+      value: '',
+      style: {},
+      focus: () => {},
+      select: () => {}
+    }),
+    body: {
+      appendChild: () => {},
+      removeChild: () => {}
+    },
+    execCommand: () => false
+  };
+
+  try {
+    const { copyToClipboard } = require('../utils/promptGenerator');
+    const result = await copyToClipboard('test');
+    if (result === false) {
+      log('  ✓ 失敗時に false が返されました', 'green');
+      return true;
+    } else {
+      log('  ✗ 失敗時に正しい値が返されません', 'red');
+      return false;
+    }
+  } catch (error) {
+    log('  ✗ copyToClipboard が例外を投げました', 'red');
+    log(error.message, 'red');
+    return false;
+  }
+}
+
 async function testBuild() {
   log('🏗️ ビルドテスト...', 'blue');
   
@@ -207,6 +251,7 @@ async function main() {
     { name: 'フォームデータ構造', fn: testFormDataStructure },
     { name: 'TypeScript コンパイル', fn: testTypeScriptCompilation },
     { name: 'プロンプト生成機能', fn: testPromptGeneratorImport },
+    { name: 'クリップボードコピー', fn: testClipboardFallback },
     { name: 'ビルド', fn: testBuild }
   ];
   
