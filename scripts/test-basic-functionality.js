@@ -3,7 +3,7 @@
 const { spawn } = require('child_process');
 const fs = require('fs');
 const path = require('path');
-require('ts-node').register({ transpileOnly: true });
+require('ts-node').register({ transpileOnly: true, compilerOptions: { module: 'commonjs' } });
 
 // カラーコード
 const colors = {
