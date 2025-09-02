@@ -300,27 +300,34 @@ function generateJsonFormat(data: FormData): string {
   return JSON.stringify(cleanObject, null, 2);
 }
 
-export function copyToClipboard(text: string): Promise<boolean> {
-  try {
-    if (navigator.clipboard && window.isSecureContext) {
-      return navigator.clipboard.writeText(text).then(() => true);
-    } else {
-      // フォールバック: テキストエリアを使用
-      const textArea = document.createElement('textarea');
-      textArea.value = text;
-      textArea.style.position = 'fixed';
-      textArea.style.left = '-999999px';
-      textArea.style.top = '-999999px';
-      document.body.appendChild(textArea);
-      textArea.focus();
-      textArea.select();
-      
-      const result = document.execCommand('copy');
-      document.body.removeChild(textArea);
-      return Promise.resolve(result);
+export async function copyToClipboard(text: string): Promise<boolean> {
+  // モダンなクリップボードAPIが利用できる場合
+  if (navigator.clipboard && window.isSecureContext) {
+    try {
+      await navigator.clipboard.writeText(text);
+      return true;
+    } catch (error) {
+      // 失敗した場合はフォールバックに移行
+      console.error('クリップボードAPIの使用に失敗しました:', error);
     }
+  }
+
+  // フォールバック: テキストエリアを使用したコピー
+  try {
+    const textArea = document.createElement('textarea');
+    textArea.value = text;
+    textArea.style.position = 'fixed';
+    textArea.style.left = '-999999px';
+    textArea.style.top = '-999999px';
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+
+    const result = document.execCommand('copy');
+    document.body.removeChild(textArea);
+    return result;
   } catch (error) {
     console.error('クリップボードへのコピーに失敗しました:', error);
-    return Promise.resolve(false);
+    return false;
   }
 }
