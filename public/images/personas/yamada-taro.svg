@@ -1,0 +1,26 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- 背景 -->
+  <circle cx="100" cy="100" r="100" fill="#3B82F6"/>
+  
+  <!-- 顔 -->
+  <circle cx="100" cy="85" r="35" fill="#FEF3C7"/>
+  
+  <!-- 髪 -->
+  <path d="M 65 70 Q 100 45 135 70 Q 130 55 100 50 Q 70 55 65 70" fill="#1F2937"/>
+  
+  <!-- 目 -->
+  <circle cx="90" cy="80" r="3" fill="#1F2937"/>
+  <circle cx="110" cy="80" r="3" fill="#1F2937"/>
+  
+  <!-- 口 -->
+  <path d="M 95 95 Q 100 100 105 95" stroke="#1F2937" stroke-width="2" fill="none"/>
+  
+  <!-- 体 -->
+  <rect x="75" y="115" width="50" height="60" rx="10" fill="#1F2937"/>
+  
+  <!-- シャツ -->
+  <rect x="80" y="120" width="40" height="50" rx="5" fill="#FFFFFF"/>
+  
+  <!-- ネクタイ -->
+  <rect x="95" y="125" width="10" height="30" fill="#DC2626"/>
+</svg>
