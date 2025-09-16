@@ -1,0 +1,38 @@
+[
+  {
+    "id": "tanaka-sakiko",
+    "name": "田中咲子",
+    "age": 28,
+    "occupation": "ITベンチャー企業 プロダクトマネージャー",
+    "description": "静岡出身、東京で働くキャリア志向の女性。ヨガと読書が趣味で、自分らしい働き方を追求中。",
+    "image": "/images/personas/tanaka-sakiko.png",
+    "tags": ["IT", "女性", "キャリア", "20代", "東京"]
+  },
+  {
+    "id": "yamada-taro",
+    "name": "山田太郎",
+    "age": 32,
+    "occupation": "フリーランスWebエンジニア",
+    "description": "大阪出身の関西弁エンジニア。妻と2歳の息子がいて、ワークライフバランスを重視。ゲームとアニメが大好き。",
+    "image": "/images/personas/yamada-taro.svg",
+    "tags": ["エンジニア", "男性", "関西弁", "フリーランス", "30代", "家族"]
+  },
+  {
+    "id": "sato-kanon",
+    "name": "佐藤花音",
+    "age": 20,
+    "occupation": "早稲田大学文学部2年生",
+    "description": "横浜出身の大学生。文学とカフェ巡りが好きで、K-POPと韓国ドラマにも夢中。将来は出版業界を志望。",
+    "image": "/images/personas/sato-kanon.png",
+    "tags": ["大学生", "女性", "文学", "20代", "東京", "K-POP"]
+  },
+  {
+    "id": "suzuki-koji",
+    "name": "鈴木浩司",
+    "age": 45,
+    "occupation": "中堅メーカー営業部長",
+    "description": "茨城出身の営業管理職。妻と高校生・中学生の息子2人の父。ゴルフと読書が趣味で、部下思いのリーダー。",
+    "image": "/images/personas/suzuki-koji.svg",
+    "tags": ["営業", "男性", "管理職", "40代", "父親", "ゴルフ"]
+  }
+]

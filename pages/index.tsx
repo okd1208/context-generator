@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Head from 'next/head';
+import Link from 'next/link';
 import { FormMode, GeneratedPrompt } from '@/types/form';
 import { formModes } from '@/utils/formData';
 import { ModeSelection } from '@/components/forms/ModeSelection';
@@ -85,8 +86,16 @@ export default function Home() {
                   コンテキスト生成ツール
                 </h1>
               </div>
-              <div className="text-sm text-gray-500">
-                完全無料・登録不要
+              <div className="flex items-center space-x-4">
+                <Link
+                  href="/samples"
+                  className="text-sm text-blue-600 hover:text-blue-800 font-medium"
+                >
+                  サンプルを見る
+                </Link>
+                <div className="text-sm text-gray-500">
+                  完全無料・登録不要
+                </div>
               </div>
             </div>
           </div>

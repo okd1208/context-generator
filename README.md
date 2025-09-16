@@ -10,6 +10,24 @@
 - **プライバシー重視**: 完全クライアントサイド処理
 - **カスタマイズ可能**: 項目の除外・プライバシー設定
 - **複数形式対応**: テキスト・JSON形式での出力
+- **ペルソナ生成**: 詳細な人物設定からAI用プロンプトを生成
+
+## 📚 ペルソナ生成機能
+
+このプロジェクトには、AIに特定の人物になりきってもらうための詳細なペルソナコンテキストを生成する機能が含まれています。
+
+### 含まれるファイル
+- `persona-generation-questions.md`: ペルソナ作成用の100の質問項目
+- `persona-generation-guidelines.md`: 効果的なペルソナ生成のためのガイドライン
+- `sample-persona-tanaka-sakiko.md`: サンプルペルソナ（28歳女性IT企業勤務）
+- `ai-persona-prompt-template.md`: AI用プロンプトのテンプレート
+- `ai-prompt-tanaka-sakiko.md`: サンプル用の完成したAIプロンプト
+
+### 活用方法
+1. 質問項目を参考に対象人物の詳細情報を収集
+2. ガイドラインに従ってペルソナを構築
+3. テンプレートを使ってAI用プロンプトを生成
+4. ChatGPT、Claude等でそのプロンプトを使用してなりきりAIを実現
 
 ## 🎯 使用例
 
@@ -78,6 +96,11 @@ context-generator/
 ├── utils/
 │   ├── formData.ts     # フォーム定義データ
 │   └── promptGenerator.ts  # プロンプト生成ロジック
+├── persona-generation-questions.md    # ペルソナ生成用質問項目（100問）
+├── persona-generation-guidelines.md   # 効果的なペルソナ生成ガイドライン
+├── sample-persona-tanaka-sakiko.md    # サンプルペルソナ（田中咲子）
+├── ai-persona-prompt-template.md      # AI用プロンプトテンプレート
+├── ai-prompt-tanaka-sakiko.md         # 田中咲子用AIプロンプト
 ├── next.config.js
 ├── tailwind.config.js
 └── package.json
