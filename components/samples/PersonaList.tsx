@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { User, Briefcase, MapPin, Tag } from 'lucide-react';
+import { User, Briefcase, MapPin, Tag, ArrowRight, Sparkles } from 'lucide-react';
 
 interface Persona {
   id: string;
@@ -17,17 +17,27 @@ interface PersonaCardProps {
 }
 
 const PersonaCard: React.FC<PersonaCardProps> = ({ persona }) => {
+  // タグのカラーマッピング
+  const getTagColor = (index: number) => {
+    const colors = [
+      'bg-mint-100 text-mint-700',
+      'bg-peach-100 text-peach-700',
+      'bg-lavender-100 text-lavender-700',
+      'bg-blue-100 text-blue-700'
+    ];
+    return colors[index % colors.length];
+  };
+
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+    <div className="card-persona group">
       {/* プロフィール画像 */}
-      <div className="relative h-48 bg-gradient-to-br from-blue-100 to-purple-100 flex items-center justify-center overflow-hidden">
+      <div className="relative h-48 -mx-6 -mt-6 mb-4 bg-gradient-to-br from-mint-100 via-peach-100 to-lavender-100 flex items-center justify-center overflow-hidden rounded-t-2xl">
         {persona.image ? (
           <img 
             src={persona.image} 
             alt={persona.name}
             className="w-full h-full object-cover"
             onError={(e) => {
-              // 画像が読み込めない場合はデフォルトアイコンを表示
               const target = e.target as HTMLImageElement;
               target.style.display = 'none';
               target.nextElementSibling?.classList.remove('hidden');
@@ -35,57 +45,51 @@ const PersonaCard: React.FC<PersonaCardProps> = ({ persona }) => {
           />
         ) : null}
         <div className={`w-24 h-24 bg-white rounded-full flex items-center justify-center shadow-lg ${persona.image ? 'hidden' : ''}`}>
-          <User className="w-12 h-12 text-gray-400" />
+          <User className="w-12 h-12 text-mint-400" />
         </div>
-        <div className="absolute top-3 right-3 bg-white/80 backdrop-blur-sm rounded-full px-2 py-1 text-sm font-medium text-gray-600">
+        <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1.5 text-sm font-bold text-gray-700 shadow-soft">
           {persona.age}歳
         </div>
       </div>
       
       {/* カード内容 */}
-      <div className="p-4">
-        <h3 className="text-xl font-bold text-gray-800 mb-2">{persona.name}</h3>
+      <div className="space-y-3">
+        <h3 className="text-xl font-bold text-gray-900">{persona.name}</h3>
         
         {/* 職業 */}
-        <div className="flex items-center text-gray-600 mb-2">
-          <Briefcase className="w-4 h-4 mr-2 flex-shrink-0" />
-          <span className="text-sm">{persona.occupation}</span>
+        <div className="flex items-center text-gray-600">
+          <Briefcase className="w-4 h-4 mr-2 flex-shrink-0 text-mint-500" />
+          <span className="text-sm font-medium">{persona.occupation}</span>
         </div>
         
         {/* 説明 */}
-        <p className="text-gray-700 text-sm mb-4 line-clamp-3">{persona.description}</p>
+        <p className="text-gray-600 text-sm line-clamp-3">{persona.description}</p>
         
         {/* タグ */}
-        <div className="flex flex-wrap gap-1 mb-4">
-          {persona.tags.slice(0, 4).map((tag, index) => (
-            <span 
+        <div className="flex flex-wrap gap-2">
+          {persona.tags.slice(0, 3).map((tag, index) => (
+            <span
               key={index}
-              className="inline-flex items-center px-2 py-1 bg-blue-50 text-blue-700 text-xs rounded-full"
+              className={`inline-flex items-center px-2.5 py-1 rounded-lg text-xs font-medium ${getTagColor(index)}`}
             >
-              <Tag className="w-3 h-3 mr-1" />
               {tag}
             </span>
           ))}
-          {persona.tags.length > 4 && (
-            <span className="text-xs text-gray-400">+{persona.tags.length - 4}</span>
+          {persona.tags.length > 3 && (
+            <span className="inline-flex items-center px-2.5 py-1 rounded-lg text-xs font-medium bg-gray-100 text-gray-600">
+              +{persona.tags.length - 3}
+            </span>
           )}
         </div>
         
-        {/* アクションボタン */}
-        <div className="flex gap-2">
-          <Link
-            href={`/samples/personas/${persona.id}`}
-            className="flex-1 bg-blue-500 text-white text-center py-2 px-4 rounded-md text-sm font-medium hover:bg-blue-600 transition-colors"
-          >
-            詳細を見る
-          </Link>
-          <Link
-            href={`/samples/personas/${persona.id}/prompt`}
-            className="flex-1 bg-gray-100 text-gray-700 text-center py-2 px-4 rounded-md text-sm font-medium hover:bg-gray-200 transition-colors"
-          >
-            プロンプト
-          </Link>
-        </div>
+        {/* 詳細を見るボタン */}
+        <Link
+          href={`/samples/personas/${persona.id}`}
+          className="flex items-center justify-between pt-4 border-t border-gray-100 group-hover:text-mint-600 transition-colors"
+        >
+          <span className="text-sm font-medium">詳細を見る</span>
+          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+        </Link>
       </div>
     </div>
   );
@@ -97,64 +101,143 @@ interface PersonaListProps {
 
 const PersonaList: React.FC<PersonaListProps> = ({ personas }) => {
   return (
-    <div className="max-w-6xl mx-auto p-6">
+    <div className="min-h-screen">
       {/* ヘッダー */}
-      <div className="text-center mb-8">
-        <h1 className="text-3xl font-bold text-gray-800 mb-4">
-          サンプルペルソナ
-        </h1>
-        <p className="text-gray-600 max-w-2xl mx-auto">
-          様々な職業・年代・性格のペルソナサンプルです。詳細情報やAI用プロンプトをご確認いただけます。
-          これらを参考に、あなた独自のペルソナを作成してみてください。
-        </p>
-      </div>
-      
-      {/* 統計情報 */}
-      <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg p-4 mb-8">
-        <div className="flex items-center justify-center gap-8">
-          <div className="text-center">
-            <div className="text-2xl font-bold text-blue-600">{personas.length}</div>
-            <div className="text-sm text-gray-600">ペルソナ</div>
-          </div>
-          <div className="text-center">
-            <div className="text-2xl font-bold text-purple-600">
-              {new Set(personas.flatMap(p => p.tags)).size}
+      <header className="bg-white/80 backdrop-blur-lg shadow-soft border-b border-gray-100 sticky top-0 z-40">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center py-4">
+            <div className="flex items-center space-x-3">
+              <Link href="/" className="flex items-center space-x-3">
+                <div className="w-10 h-10 bg-gradient-to-br from-mint-400 to-mint-500 rounded-xl flex items-center justify-center shadow-soft animate-float">
+                  <Sparkles className="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <h1 className="text-xl font-bold bg-gradient-to-r from-mint-600 to-peach-600 bg-clip-text text-transparent">
+                    Context Generator
+                  </h1>
+                  <p className="text-xs text-gray-500">AIペルソナを簡単作成</p>
+                </div>
+              </Link>
             </div>
-            <div className="text-sm text-gray-600">タグ</div>
-          </div>
-          <div className="text-center">
-            <div className="text-2xl font-bold text-green-600">
-              {Math.min(...personas.map(p => p.age))} - {Math.max(...personas.map(p => p.age))}歳
+            
+            <nav className="hidden md:flex items-center space-x-1">
+              <Link href="/" className="nav-item">
+                🏠 ホーム
+              </Link>
+              <button className="nav-item nav-item-active">
+                📝 サンプル
+              </button>
+              <button className="nav-item">
+                ⭐ お気に入り
+              </button>
+            </nav>
+            
+            <div className="flex items-center space-x-3">
+              <span className="badge badge-new">✨ NEW</span>
             </div>
-            <div className="text-sm text-gray-600">年齢幅</div>
           </div>
         </div>
-      </div>
-      
+      </header>
+
+      {/* ヒーローセクション */}
+      <section className="relative overflow-hidden bg-gradient-to-br from-mint-50 via-peach-50 to-lavender-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div className="text-center space-y-4">
+            <div className="inline-flex items-center space-x-2 bg-white px-4 py-2 rounded-full shadow-soft">
+              <span className="text-2xl">📚</span>
+              <span className="text-sm font-medium text-gray-700">
+                様々なペルソナサンプルをご用意
+              </span>
+            </div>
+            
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
+              <span className="bg-gradient-to-r from-mint-500 to-peach-500 bg-clip-text text-transparent">
+                サンプルペルソナ
+              </span>
+              コレクション
+            </h2>
+            
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              様々な職業・年代・性格のペルソナをご用意しました。
+              詳細情報やAI用プロンプトをすぐにお使いいただけます。
+            </p>
+            
+            {/* 統計情報 */}
+            <div className="flex justify-center gap-8 pt-6">
+              <div className="text-center">
+                <div className="text-2xl font-bold text-mint-600">{personas.length}</div>
+                <div className="text-sm text-gray-600">ペルソナ</div>
+              </div>
+              <div className="text-center">
+                <div className="text-2xl font-bold text-peach-600">10+</div>
+                <div className="text-sm text-gray-600">カテゴリー</div>
+              </div>
+              <div className="text-center">
+                <div className="text-2xl font-bold text-lavender-600">∞</div>
+                <div className="text-sm text-gray-600">可能性</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ペルソナグリッド */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {personas.map((persona) => (
-          <PersonaCard key={persona.id} persona={persona} />
-        ))}
-      </div>
-      
-      {/* フッター情報 */}
-      <div className="mt-12 text-center">
-        <div className="bg-gray-50 rounded-lg p-6">
-          <h3 className="text-lg font-semibold text-gray-800 mb-2">
-            オリジナルペルソナを作成しませんか？
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        {personas.length === 0 ? (
+          <div className="text-center py-12">
+            <div className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <User className="w-12 h-12 text-gray-400" />
+            </div>
+            <p className="text-gray-600 text-lg">
+              ペルソナデータが見つかりませんでした
+            </p>
+          </div>
+        ) : (
+          <>
+            <div className="flex justify-between items-center mb-8">
+              <h3 className="text-xl font-bold text-gray-900">
+                全{personas.length}件のペルソナ
+              </h3>
+              <div className="flex gap-2">
+                <button className="tag-category">
+                  🎨 全て
+                </button>
+                <button className="tag">
+                  👨‍💼 ビジネス
+                </button>
+                <button className="tag">
+                  🎓 教育
+                </button>
+                <button className="tag">
+                  💻 IT
+                </button>
+              </div>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {personas.map((persona) => (
+                <PersonaCard key={persona.id} persona={persona} />
+              ))}
+            </div>
+          </>
+        )}
+      </main>
+
+      {/* CTA セクション */}
+      <section className="bg-gradient-to-r from-mint-50 to-peach-50 py-12 mt-12">
+        <div className="max-w-4xl mx-auto px-4 text-center">
+          <h3 className="text-2xl font-bold text-gray-900 mb-4">
+            あなたオリジナルのペルソナを作成しませんか？
           </h3>
-          <p className="text-gray-600 mb-4">
-            これらのサンプルを参考に、あなただけのペルソナを作成することができます。
+          <p className="text-gray-600 mb-6">
+            サンプルを参考に、あなただけのAIペルソナを簡単に作成できます
           </p>
-          <Link
-            href="/"
-            className="inline-flex items-center bg-green-500 text-white py-2 px-6 rounded-md font-medium hover:bg-green-600 transition-colors"
-          >
-            ペルソナ作成を開始
+          <Link href="/" className="btn-primary inline-flex items-center space-x-2">
+            <Sparkles className="w-5 h-5" />
+            <span>ペルソナを作成する</span>
           </Link>
         </div>
-      </div>
+      </section>
     </div>
   );
 };

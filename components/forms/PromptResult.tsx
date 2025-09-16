@@ -65,8 +65,11 @@ export const PromptResult: React.FC<PromptResultProps> = ({
   };
 
   return (
-    <div className="space-y-6">
+    <div className="max-w-4xl mx-auto space-y-6 px-4 py-6">
       <div className="text-center">
+        <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-mint-400 to-mint-500 rounded-full mb-4 animate-bounce-light">
+          <Check className="w-8 h-8 text-white" />
+        </div>
         <h2 className="text-2xl font-bold text-gray-900 mb-2">
           コンテキスト生成完了！
         </h2>
@@ -77,7 +80,7 @@ export const PromptResult: React.FC<PromptResultProps> = ({
 
       {/* タブ */}
       <div className="flex justify-center">
-        <div className="flex bg-gray-100 rounded-lg p-1">
+        <div className="flex bg-gray-100 rounded-xl p-1">
           <button
             onClick={() => setActiveTab('basic')}
             className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${
