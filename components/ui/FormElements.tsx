@@ -127,3 +127,207 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
     </div>
   );
 };
+
+interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  label?: string;
+  description?: string;
+  error?: string;
+}
+
+export const Input: React.FC<InputProps> = ({
+  label,
+  description,
+  error,
+  className,
+  ...props
+}) => {
+  return (
+    <div className="w-full">
+      {label && (
+        <label className="block text-sm font-medium text-gray-700 mb-1">
+          {label}
+        </label>
+      )}
+      {description && (
+        <p className="text-xs text-gray-500 mb-2">{description}</p>
+      )}
+      <input
+        className={clsx(
+          'input-field',
+          error && 'border-red-500 focus:ring-red-500',
+          className
+        )}
+        {...props}
+      />
+      {error && (
+        <p className="mt-1 text-sm text-red-600">{error}</p>
+      )}
+    </div>
+  );
+};
+
+interface TextAreaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
+  label?: string;
+  description?: string;
+  error?: string;
+}
+
+export const TextArea: React.FC<TextAreaProps> = ({
+  label,
+  description,
+  error,
+  className,
+  ...props
+}) => {
+  return (
+    <div className="w-full">
+      {label && (
+        <label className="block text-sm font-medium text-gray-700 mb-1">
+          {label}
+        </label>
+      )}
+      {description && (
+        <p className="text-xs text-gray-500 mb-2">{description}</p>
+      )}
+      <textarea
+        className={clsx(
+          'textarea-field',
+          error && 'border-red-500 focus:ring-red-500',
+          className
+        )}
+        {...props}
+      />
+      {error && (
+        <p className="mt-1 text-sm text-red-600">{error}</p>
+      )}
+    </div>
+  );
+};
+
+interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
+  label?: string;
+  description?: string;
+  error?: string;
+  options: Array<{ value: string; label: string }>;
+}
+
+export const Select: React.FC<SelectProps> = ({
+  label,
+  description,
+  error,
+  options,
+  className,
+  ...props
+}) => {
+  return (
+    <div className="w-full">
+      {label && (
+        <label className="block text-sm font-medium text-gray-700 mb-1">
+          {label}
+        </label>
+      )}
+      {description && (
+        <p className="text-xs text-gray-500 mb-2">{description}</p>
+      )}
+      <select
+        className={clsx(
+          'input-field',
+          error && 'border-red-500 focus:ring-red-500',
+          className
+        )}
+        {...props}
+      >
+        <option value="">選択してください</option>
+        {options.map((option) => (
+          <option key={option.value} value={option.value}>
+            {option.label}
+          </option>
+        ))}
+      </select>
+      {error && (
+        <p className="mt-1 text-sm text-red-600">{error}</p>
+      )}
+    </div>
+  );
+};
+
+interface CheckboxProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  label: string;
+}
+
+export const Checkbox: React.FC<CheckboxProps> = ({
+  label,
+  className,
+  ...props
+}) => {
+  return (
+    <label className="flex items-center space-x-3 cursor-pointer">
+      <input
+        type="checkbox"
+        className={clsx(
+          'w-4 h-4 text-mint-600 bg-white border-gray-300 rounded focus:ring-mint-500 focus:ring-2',
+          className
+        )}
+        {...props}
+      />
+      <span className="text-sm text-gray-700">{label}</span>
+    </label>
+  );
+};
+
+interface MultiSelectProps {
+  label?: string;
+  description?: string;
+  options: Array<{ value: string; label: string }>;
+  value: string[];
+  onChange: (values: string[]) => void;
+  error?: string;
+}
+
+export const MultiSelect: React.FC<MultiSelectProps> = ({
+  label,
+  description,
+  options,
+  value = [],
+  onChange,
+  error,
+}) => {
+  const handleChange = (optionValue: string) => {
+    const newValue = value.includes(optionValue)
+      ? value.filter((v) => v !== optionValue)
+      : [...value, optionValue];
+    onChange(newValue);
+  };
+
+  return (
+    <div className="w-full">
+      {label && (
+        <label className="block text-sm font-medium text-gray-700 mb-2">
+          {label}
+        </label>
+      )}
+      {description && (
+        <p className="text-xs text-gray-500 mb-2">{description}</p>
+      )}
+      <div className="space-y-2 max-h-60 overflow-y-auto border-2 border-gray-200 rounded-xl p-3">
+        {options.map((option) => (
+          <label
+            key={option.value}
+            className="flex items-center space-x-3 cursor-pointer hover:bg-gray-50 p-2 rounded-lg transition-colors"
+          >
+            <input
+              type="checkbox"
+              checked={value.includes(option.value)}
+              onChange={() => handleChange(option.value)}
+              className="w-4 h-4 text-mint-600 bg-white border-gray-300 rounded focus:ring-mint-500 focus:ring-2"
+            />
+            <span className="text-sm text-gray-700">{option.label}</span>
+          </label>
+        ))}
+      </div>
+      {error && (
+        <p className="mt-1 text-sm text-red-600">{error}</p>
+      )}
+    </div>
+  );
+};
