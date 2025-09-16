@@ -253,25 +253,32 @@ export const Select: React.FC<SelectProps> = ({
 
 interface CheckboxProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label: string;
+  description?: string;
 }
 
 export const Checkbox: React.FC<CheckboxProps> = ({
   label,
+  description,
   className,
   ...props
 }) => {
   return (
-    <label className="flex items-center space-x-3 cursor-pointer">
-      <input
-        type="checkbox"
-        className={clsx(
-          'w-4 h-4 text-mint-600 bg-white border-gray-300 rounded focus:ring-mint-500 focus:ring-2',
-          className
-        )}
-        {...props}
-      />
-      <span className="text-sm text-gray-700">{label}</span>
-    </label>
+    <div className="flex flex-col space-y-1">
+      <label className="flex items-center space-x-3 cursor-pointer">
+        <input
+          type="checkbox"
+          className={clsx(
+            'w-4 h-4 text-mint-600 bg-white border-gray-300 rounded focus:ring-mint-500 focus:ring-2',
+            className
+          )}
+          {...props}
+        />
+        <span className="text-sm text-gray-700">{label}</span>
+      </label>
+      {description && (
+        <p className="text-xs text-gray-500 ml-7">{description}</p>
+      )}
+    </div>
   );
 };
 
