@@ -206,7 +206,7 @@ export const ContextForm: React.FC<ContextFormProps> = ({
   }, [currentSectionIndex]);
 
   return (
-    <div className="max-w-4xl mx-auto space-y-6">
+    <div className="max-w-4xl mx-auto space-y-6 px-4 py-6">
       {/* ヘッダー */}
       <div className="space-y-2">
         <div className="flex items-center justify-between">
@@ -220,7 +220,7 @@ export const ContextForm: React.FC<ContextFormProps> = ({
             <span>トップに戻る</span>
           </Button>
           <Button
-            variant="outline"
+            variant="ghost"
             size="sm"
             onClick={() => setShowPrivacySettings(!showPrivacySettings)}
             className="flex items-center space-x-2"
@@ -275,13 +275,15 @@ export const ContextForm: React.FC<ContextFormProps> = ({
       )}
 
       {/* プログレスバー */}
-      <ProgressBar
-        current={currentSectionIndex + 1}
-        total={visibleSections.length}
-      />
+      <Card variant="gradient">
+        <ProgressBar
+          current={currentSectionIndex + 1}
+          total={visibleSections.length}
+        />
+      </Card>
 
       {/* フォームセクション */}
-      <Card>
+      <Card variant="default" className="p-8">
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
           {currentSection && (
             <FormSection
@@ -334,13 +336,28 @@ export const ContextForm: React.FC<ContextFormProps> = ({
       </Card>
 
       {/* ヒント */}
-      <Card className="bg-gray-50">
-        <h4 className="font-medium text-gray-900 mb-2">💡 ヒント</h4>
-        <ul className="text-sm text-gray-600 space-y-1">
-          <li>• 項目は空欄でも構いません。入力した内容に基づいてコンテキストが生成されます</li>
-          <li>• エンジニアにチェックを入れると、技術関連の詳細な質問が追加されます</li>
-          <li>• プライバシー設定で個人情報の含有をコントロールできます</li>
-          <li>• 各項目の👁️アイコンで個別にコンテキストから除外可能です</li>
+      <Card variant="gradient" className="bg-gradient-to-br from-mint-50 via-white to-peach-50">
+        <h4 className="font-bold text-gray-900 mb-3 flex items-center space-x-2">
+          <span className="text-xl">💡</span>
+          <span>ヒント</span>
+        </h4>
+        <ul className="text-sm text-gray-600 space-y-2">
+          <li className="flex items-start space-x-2">
+            <span className="text-mint-500 mt-0.5">•</span>
+            <span>項目は空欄でも構いません。入力した内容に基づいてコンテキストが生成されます</span>
+          </li>
+          <li className="flex items-start space-x-2">
+            <span className="text-peach-500 mt-0.5">•</span>
+            <span>エンジニアにチェックを入れると、技術関連の詳細な質問が追加されます</span>
+          </li>
+          <li className="flex items-start space-x-2">
+            <span className="text-lavender-500 mt-0.5">•</span>
+            <span>プライバシー設定で個人情報の含有をコントロールできます</span>
+          </li>
+          <li className="flex items-start space-x-2">
+            <span className="text-mint-500 mt-0.5">•</span>
+            <span>各項目の👁️アイコンで個別にコンテキストから除外可能です</span>
+          </li>
         </ul>
       </Card>
     </div>
