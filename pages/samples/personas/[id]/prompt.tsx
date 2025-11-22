@@ -49,7 +49,7 @@ const PromptPage: React.FC<PromptPageProps> = ({ persona, promptContent }) => {
   return (
     <>
       <Head>
-        <title>{persona.name}のAIプロンプト | AIコンテキスト生成ツール</title>
+        <title>{`${persona.name}のAIプロンプト | AIコンテキスト生成ツール`}</title>
         <meta name="description" content={`${persona.name}のAI用プロンプト。ChatGPTやClaudeで使用できます。`} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
@@ -174,10 +174,19 @@ export const getStaticPaths: GetStaticPaths = async () => {
     const filePath = path.join(process.cwd(), 'samples', 'personas-list.json');
     const jsonData = fs.readFileSync(filePath, 'utf8');
     const personas: Persona[] = JSON.parse(jsonData);
-    
-    const paths = personas.map((persona) => ({
-      params: { id: persona.id },
-    }));
+
+    // プロンプトMDが存在するIDのみを対象にする
+    const paths = personas
+      .filter((p) => {
+        // 新構造: samples/personas/<id>/prompt.md
+        const newPath = path.join(process.cwd(), 'samples', 'personas', p.id, 'prompt.md');
+        // 旧構造: samples/personas/<id>-prompt.md
+        const oldPath = path.join(process.cwd(), 'samples', 'personas', `${p.id}-prompt.md`);
+        return fs.existsSync(newPath) || fs.existsSync(oldPath);
+      })
+      .map((persona) => ({
+        params: { id: persona.id },
+      }));
 
     return { paths, fallback: false };
   } catch (error) {
@@ -198,8 +207,11 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     }
 
     // プロンプトコンテンツを取得
-    const promptFilePath = path.join(process.cwd(), 'samples', 'personas', `${params?.id}-prompt.md`);
-    const promptContent = fs.readFileSync(promptFilePath, 'utf8');
+    // 新構造優先、なければ旧構造を参照
+    const newPromptPath = path.join(process.cwd(), 'samples', 'personas', String(params?.id), 'prompt.md');
+    const oldPromptPath = path.join(process.cwd(), 'samples', 'personas', `${params?.id}-prompt.md`);
+    const promptPath = fs.existsSync(newPromptPath) ? newPromptPath : oldPromptPath;
+    const promptContent = fs.readFileSync(promptPath, 'utf8');
 
     return {
       props: {

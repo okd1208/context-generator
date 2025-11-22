@@ -70,7 +70,7 @@ const PersonaDetailPage: React.FC<PersonaDetailPageProps> = ({ persona, content 
   return (
     <>
       <Head>
-        <title>{persona.name} | ペルソナ詳細</title>
+        <title>{`${persona.name} | ペルソナ詳細`}</title>
         <meta name="description" content={persona.description} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
@@ -199,9 +199,11 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       return { notFound: true };
     }
 
-    // 詳細コンテンツを取得
-    const contentFilePath = path.join(process.cwd(), 'samples', 'personas', `${params?.id}.md`);
-    const content = fs.readFileSync(contentFilePath, 'utf8');
+    // 詳細コンテンツを取得（新構造優先）
+    const newContentPath = path.join(process.cwd(), 'samples', 'personas', String(params?.id), 'profile.md');
+    const oldContentPath = path.join(process.cwd(), 'samples', 'personas', `${params?.id}.md`);
+    const contentPath = fs.existsSync(newContentPath) ? newContentPath : oldContentPath;
+    const content = fs.readFileSync(contentPath, 'utf8');
 
     return {
       props: {

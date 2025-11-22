@@ -14,7 +14,7 @@
     "age": 32,
     "occupation": "フリーランスWebエンジニア",
     "description": "大阪出身の関西弁エンジニア。妻と2歳の息子がいて、ワークライフバランスを重視。ゲームとアニメが大好き。",
-    "image": "/images/personas/yamada-taro.svg",
+    "image": "/images/personas/yamada-taro.png",
     "tags": ["エンジニア", "男性", "関西弁", "フリーランス", "30代", "家族"]
   },
   {
@@ -32,7 +32,142 @@
     "age": 45,
     "occupation": "中堅メーカー営業部長",
     "description": "茨城出身の営業管理職。妻と高校生・中学生の息子2人の父。ゴルフと読書が趣味で、部下思いのリーダー。",
-    "image": "/images/personas/suzuki-koji.svg",
+    "image": "/images/personas/suzuki-koji.png",
     "tags": ["営業", "男性", "管理職", "40代", "父親", "ゴルフ"]
+  },
+  {
+    "id": "takahashi-akari",
+    "name": "高橋あかり",
+    "age": 24,
+    "occupation": "美容部員 / SNSインフルエンサー",
+    "description": "埼玉出身、渋谷区在住。百貨店勤務の美容部員で副業でSNS活動。TikTokとInstagramで合計10万フォロワー。",
+    "image": "/images/personas/takahashi-akari.png",
+    "tags": ["美容", "女性", "インフルエンサー", "20代", "東京"]
+  },
+  {
+    "id": "ito-misaki",
+    "name": "伊藤美咲",
+    "age": 42,
+    "occupation": "公立小学校教諭",
+    "description": "北海道出身、千葉県在住。5年生担任の小学校教師。夫と2人の子供の母親。インクルーシブ教育に情熱を注ぐ。",
+    "image": "/images/personas/ito-misaki.png",
+    "tags": ["教師", "女性", "母親", "40代", "千葉"]
+  },
+  {
+    "id": "matsumoto-rina",
+    "name": "松本りな",
+    "age": 26,
+    "occupation": "UXデザイナー",
+    "description": "神戸出身、大阪在住。スタートアップ企業のUXデザイナー。彼氏と同棲中で、アートとデザインを愛する。",
+    "image": "/images/personas/matsumoto-rina.png",
+    "tags": ["デザイナー", "女性", "スタートアップ", "20代", "大阪"]
+  },
+  {
+    "id": "nakamura-yui",
+    "name": "中村ゆい",
+    "age": 35,
+    "occupation": "フリーランスイラストレーター",
+    "description": "福岡出身、鎌倉在住。夫と猫2匹と暮らすイラストレーター。絵本がベストセラーに。自然と創作を愛する。",
+    "image": "/images/personas/nakamura-yui.png",
+    "tags": ["イラストレーター", "女性", "フリーランス", "30代", "鎌倉"]
+  },
+  {
+    "id": "watanabe-haruka",
+    "name": "渡辺はるか",
+    "age": 19,
+    "occupation": "製菓専門学校生 / カフェ店員",
+    "description": "名古屋在住の製菓専門学校生。パティシエを目指して修行中。祖母が和菓子職人で、お菓子作りが人生。",
+    "image": "/images/personas/watanabe-haruka.png",
+    "tags": ["学生", "女性", "パティシエ", "10代", "名古屋"]
+  },
+  {
+    "id": "kobayashi-chinatsu",
+    "name": "小林千夏",
+    "age": 38,
+    "occupation": "大学准教授 / 作家",
+    "description": "京都在住の文学研究者。源氏物語の専門家で、小説も執筆。独身で学問と創作に生きる。",
+    "image": "/images/personas/kobayashi-chinatsu.png",
+    "tags": ["教授", "女性", "作家", "30代", "京都"]
+  },
+  {
+    "id": "morita-ai",
+    "name": "森田あい",
+    "age": 52,
+    "occupation": "パート / 主婦",
+    "description": "広島在住の主婦。2人の娘は独立。スーパーでパートしながら、韓ドラとヨガを楽しむ日々。",
+    "image": "/images/personas/morita-ai.png",
+    "tags": ["主婦", "女性", "パート", "50代", "広島"]
+  },
+  {
+    "id": "kuroda-maria",
+    "name": "黒田まりあ",
+    "age": 31,
+    "occupation": "外資系コンサルタント",
+    "description": "仙台出身、港区在住のエリートコンサル。MBA持ち。激務の中でもワークアウトは欠かさない。",
+    "image": "/images/personas/kuroda-maria.png",
+    "tags": ["コンサル", "女性", "エリート", "30代", "東京"]
+  },
+  {
+    "id": "aoki-yuri",
+    "name": "青木ゆり",
+    "age": 29,
+    "occupation": "看護師",
+    "description": "鹿児島出身、福岡在住。大学病院の救急外来勤務。彼氏と同棲中で、患者さんの明日を守る。",
+    "image": "/images/personas/aoki-yuri.png",
+    "tags": ["看護師", "女性", "医療", "20代", "福岡"]
+  },
+  {
+    "id": "hashimoto-nana",
+    "name": "橋本なな",
+    "age": 22,
+    "occupation": "フリーター / ダンサー志望",
+    "description": "岡山から上京したダンサー志望。複数バイトで生活しながら、プロを目指して奮闘中。",
+    "image": "/images/personas/hashimoto-nana.png",
+    "tags": ["ダンサー", "女性", "フリーター", "20代", "東京"]
+  },
+  {
+    "id": "nishimura-sakura",
+    "name": "西村さくら",
+    "age": 33,
+    "occupation": "ヨガインストラクター / カフェオーナー",
+    "description": "東京から長野へ移住。夫と息子と暮らしながら、古民家カフェとヨガスタジオを経営。スローライフ実践中。",
+    "image": "/images/personas/nishimura-sakura.png",
+    "tags": ["ヨガ", "女性", "カフェ", "30代", "長野"]
+  },
+  {
+    "id": "ohno-rei",
+    "name": "大野れい",
+    "age": 41,
+    "occupation": "ゲストハウス経営 / ダイビングインストラクター",
+    "description": "横浜から沖縄へ移住したシングルマザー。娘と二人暮らし。海を愛し、自由に生きる。",
+    "image": "/images/personas/ohno-rei.png",
+    "tags": ["経営者", "女性", "シングルマザー", "40代", "沖縄"]
+  },
+  {
+    "id": "yoshida-emi",
+    "name": "吉田えみ",
+    "age": 27,
+    "occupation": "地方公務員（市役所福祉課）",
+    "description": "仙台在住の公務員。東日本大震災を経験し、福祉の道へ。実家で祖母の介護をしながら、婚活中。",
+    "image": "/images/personas/yoshida-emi.png",
+    "tags": ["公務員", "女性", "福祉", "20代", "仙台"]
+  },
+  {
+    "id": "murakami-ayaka",
+    "name": "村上あやか",
+    "age": 46,
+    "occupation": "和菓子店女将 / 茶道教室主宰",
+    "description": "札幌の老舗和菓子店3代目女将。夫と2人の子供の母。茶道教室を開き、日本文化の継承に努める。",
+    "image": "/images/personas/murakami-ayaka.png",
+    "tags": ["経営者", "女性", "伝統", "40代", "札幌"]
+  },
+  {
+    "id": "hayashi-mio",
+    "name": "林みお",
+    "age": 23,
+    "occupation": "声優志望 / アニメイトスタッフ",
+    "description": "和歌山出身、大阪在住の声優志望。アニメイトで働きながらオーディションに挑戦。推し活に人生を捧げる。",
+    "image": "/images/personas/hayashi-mio.png",
+    "tags": ["声優志望", "女性", "オタク", "20代", "大阪"]
   }
 ]
