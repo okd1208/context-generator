@@ -5,16 +5,7 @@ import Link from 'next/link';
 import { ArrowLeft, Copy, Download, Check, User } from 'lucide-react';
 import fs from 'fs';
 import path from 'path';
-
-interface Persona {
-  id: string;
-  name: string;
-  age: number;
-  occupation: string;
-  description: string;
-  image: string;
-  tags: string[];
-}
+import { Persona } from '@/types/persona';
 
 interface PromptPageProps {
   persona: Persona;

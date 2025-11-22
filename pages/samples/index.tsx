@@ -4,16 +4,7 @@ import Head from 'next/head';
 import PersonaList from '../../components/samples/PersonaList';
 import fs from 'fs';
 import path from 'path';
-
-interface Persona {
-  id: string;
-  name: string;
-  age: number;
-  occupation: string;
-  description: string;
-  image: string;
-  tags: string[];
-}
+import { Persona } from '@/types/persona';
 
 interface SamplesPageProps {
   personas: Persona[];

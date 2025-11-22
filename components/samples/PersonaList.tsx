@@ -1,16 +1,8 @@
-import React from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { User, Briefcase, MapPin, Tag, ArrowRight, Sparkles } from 'lucide-react';
-
-interface Persona {
-  id: string;
-  name: string;
-  age: number;
-  occupation: string;
-  description: string;
-  image: string;
-  tags: string[];
-}
+import { Persona, matchesGender, locationMatches, containsText } from '@/types/persona';
 
 interface PersonaCardProps {
   persona: Persona;
@@ -100,6 +92,111 @@ interface PersonaListProps {
 }
 
 const PersonaList: React.FC<PersonaListProps> = ({ personas }) => {
+  const router = useRouter();
+  const [hydrated, setHydrated] = useState(false);
+  // Option lists
+  const occupationCategoryOptions = useMemo(() => {
+    const s = new Set<string>();
+    personas.forEach(p => p.occupationCategory && s.add(p.occupationCategory));
+    return Array.from(s);
+  }, [personas]);
+  const occupationOptions = useMemo(() => {
+    const s = new Set<string>();
+    personas.forEach(p => p.occupation && s.add(p.occupation));
+    return Array.from(s);
+  }, [personas]);
+  const birthplaceOptions = useMemo(() => {
+    const s = new Set<string>();
+    personas.forEach(p => p.birthplace?.prefecture && s.add(p.birthplace.prefecture));
+    return Array.from(s);
+  }, [personas]);
+  const residenceOptions = useMemo(() => {
+    const s = new Set<string>();
+    personas.forEach(p => p.residence?.prefecture && s.add(p.residence.prefecture));
+    return Array.from(s);
+  }, [personas]);
+
+  // Filters (selection-based)
+  const [gender, setGender] = useState<'all' | '女性' | '男性' | 'その他'>('all');
+  const [ageMin, setAgeMin] = useState<string>('');
+  const [ageMax, setAgeMax] = useState<string>('');
+  const [occupationCategory, setOccupationCategory] = useState<string>('');
+  const [occupation, setOccupation] = useState<string>('');
+  const [birthplace, setBirthplace] = useState<string>('');
+  const [residence, setResidence] = useState<string>('');
+  const [keyword, setKeyword] = useState<string>('');
+
+  const resetFilters = () => {
+    setGender('all');
+    setAgeMin('');
+    setAgeMax('');
+    setOccupationCategory('');
+    setOccupation('');
+    setBirthplace('');
+    setResidence('');
+    setKeyword('');
+    router.replace({ pathname: '/samples' }, undefined, { shallow: true });
+  };
+
+  // Load from query
+  useEffect(() => {
+    const q = router.query;
+    if (!q) return;
+    setGender((q.gender as any) || 'all');
+    setAgeMin((q.ageMin as string) || '');
+    setAgeMax((q.ageMax as string) || '');
+    setOccupationCategory((q.occupationCategory as string) || '');
+    setOccupation((q.occupation as string) || '');
+    setBirthplace((q.birthplace as string) || '');
+    setResidence((q.residence as string) || '');
+    setKeyword((q.q as string) || '');
+    // 状態反映後に同期を有効化（初期クエリを上書きしない）
+    setTimeout(() => setHydrated(true), 0);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [router.isReady]);
+
+  // Sync query when filters change (auto-search)
+  useEffect(() => {
+    if (!hydrated) return;
+    const query: Record<string, any> = {};
+    if (gender !== 'all') query.gender = gender;
+    if (ageMin) query.ageMin = ageMin;
+    if (ageMax) query.ageMax = ageMax;
+    if (occupationCategory) query.occupationCategory = occupationCategory;
+    if (occupation) query.occupation = occupation;
+    if (birthplace) query.birthplace = birthplace;
+    if (residence) query.residence = residence;
+    if (keyword) query.q = keyword;
+    router.replace({ pathname: '/samples', query }, undefined, { shallow: true });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [gender, ageMin, ageMax, occupationCategory, occupation, birthplace, residence, keyword, hydrated]);
+
+  const filtered = useMemo(() => {
+    return personas.filter((p) => {
+      if (gender !== 'all' && !matchesGender(p, gender as any)) return false;
+
+      const min = ageMin ? parseInt(ageMin, 10) : undefined;
+      const max = ageMax ? parseInt(ageMax, 10) : undefined;
+      if (min !== undefined && p.age < min) return false;
+      if (max !== undefined && p.age > max) return false;
+
+      if (occupationCategory && p.occupationCategory !== occupationCategory) return false;
+      if (occupation && p.occupation !== occupation) return false;
+
+
+      if (birthplace && p.birthplace?.prefecture !== birthplace) return false;
+      if (residence && p.residence?.prefecture !== residence) return false;
+
+      if (keyword) {
+        const q = keyword.toLowerCase();
+        const hit = containsText(p.name, q) || containsText(p.description, q) || containsText(p.occupation, q) || (p.tags || []).some(t => t.toLowerCase().includes(q));
+        if (!hit) return false;
+      }
+
+      return true;
+    });
+  }, [personas, gender, ageMin, ageMax, occupationCategory, occupation, birthplace, residence, keyword]);
+
   return (
     <div className="min-h-screen">
       {/* ヘッダー */}
@@ -172,39 +269,98 @@ const PersonaList: React.FC<PersonaListProps> = ({ personas }) => {
         </div>
       </section>
 
+      {/* フィルター */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <div className="card p-4">
+          <div className="grid md:grid-cols-3 lg:grid-cols-6 gap-3 items-end">
+            <div>
+              <label className="text-xs text-gray-600">性別</label>
+              <select className="mt-1 form-input" value={gender} onChange={(e) => setGender(e.target.value as any)}>
+                <option value="all">すべて</option>
+                <option value="女性">女性</option>
+                <option value="男性">男性</option>
+                <option value="その他">その他</option>
+              </select>
+            </div>
+            <div>
+              <label className="text-xs text-gray-600">年齢 最小</label>
+              <input type="number" inputMode="numeric" className="mt-1 form-input" placeholder="min" value={ageMin} onChange={(e) => setAgeMin(e.target.value)} />
+            </div>
+            <div>
+              <label className="text-xs text-gray-600">年齢 最大</label>
+              <input type="number" inputMode="numeric" className="mt-1 form-input" placeholder="max" value={ageMax} onChange={(e) => setAgeMax(e.target.value)} />
+            </div>
+            <div>
+              <label className="text-xs text-gray-600">職業カテゴリ</label>
+              <select className="mt-1 form-input" value={occupationCategory} onChange={(e) => setOccupationCategory(e.target.value)}>
+                <option value="">すべて</option>
+                {occupationCategoryOptions.map(opt => (
+                  <option key={opt} value={opt}>{opt}</option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label className="text-xs text-gray-600">職業（詳細）</label>
+              <select className="mt-1 form-input" value={occupation} onChange={(e) => setOccupation(e.target.value)}>
+                <option value="">すべて</option>
+                {occupationOptions.map(opt => (
+                  <option key={opt} value={opt}>{opt}</option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label className="text-xs text-gray-600">キーワード</label>
+              <input type="text" className="mt-1 form-input" placeholder="自由検索（名前・説明・タグなど）" value={keyword} onChange={(e) => setKeyword(e.target.value)} />
+            </div>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-3 mt-3">
+            <div>
+              <label className="text-xs text-gray-600">出身地（都道府県）</label>
+              <select className="mt-1 form-input" value={birthplace} onChange={(e) => setBirthplace(e.target.value)}>
+                <option value="">すべて</option>
+                {birthplaceOptions.map(opt => (
+                  <option key={opt} value={opt}>{opt}</option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label className="text-xs text-gray-600">在住地（都道府県）</label>
+              <select className="mt-1 form-input" value={residence} onChange={(e) => setResidence(e.target.value)}>
+                <option value="">すべて</option>
+                {residenceOptions.map(opt => (
+                  <option key={opt} value={opt}>{opt}</option>
+                ))}
+              </select>
+            </div>
+            {/* 性格・特徴の選択は未整備のため一旦未実装 */}
+            <div className="flex gap-2 md:col-span-2 lg:col-span-4 justify-between items-center">
+              <span className="text-xs text-gray-500">条件は変更と同時に適用されます</span>
+              <button className="btn-secondary h-10 px-3" onClick={resetFilters}>クリア</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ペルソナグリッド */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        {personas.length === 0 ? (
+        {filtered.length === 0 ? (
           <div className="text-center py-12">
             <div className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
               <User className="w-12 h-12 text-gray-400" />
             </div>
             <p className="text-gray-600 text-lg">
-              コンテキストが見つかりませんでした
+              条件に一致するコンテキストが見つかりませんでした
             </p>
           </div>
         ) : (
           <>
             <div className="flex justify-between items-center mb-8">
-              <h3 className="text-xl font-bold text-gray-900">全{personas.length}件のコンテキスト</h3>
-              <div className="flex gap-2">
-                <button className="tag-category">
-                  🎨 全て
-                </button>
-                <button className="tag">
-                  👨‍💼 ビジネス
-                </button>
-                <button className="tag">
-                  🎓 教育
-                </button>
-                <button className="tag">
-                  💻 IT
-                </button>
-              </div>
+              <h3 className="text-xl font-bold text-gray-900">該当 {filtered.length} 件のコンテキスト</h3>
+              <div className="text-sm text-gray-600">全 {personas.length} 件からフィルタ</div>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {personas.map((persona) => (
+              {filtered.map((persona) => (
                 <PersonaCard key={persona.id} persona={persona} />
               ))}
             </div>

@@ -5,16 +5,7 @@ import Link from 'next/link';
 import { ArrowLeft, User, Briefcase, MapPin, Calendar, Tag, Download, Eye } from 'lucide-react';
 import fs from 'fs';
 import path from 'path';
-
-interface Persona {
-  id: string;
-  name: string;
-  age: number;
-  occupation: string;
-  description: string;
-  image: string;
-  tags: string[];
-}
+import { Persona } from '@/types/persona';
 
 interface PersonaDetailPageProps {
   persona: Persona;
