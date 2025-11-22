@@ -113,20 +113,16 @@ const PersonaList: React.FC<PersonaListProps> = ({ personas }) => {
                 </div>
                 <div>
                   <h1 className="text-xl font-bold bg-gradient-to-r from-mint-600 to-peach-600 bg-clip-text text-transparent">
-                    Context Generator
+                    Context Collection
                   </h1>
-                  <p className="text-xs text-gray-500">AIペルソナを簡単作成</p>
+                  <p className="text-xs text-gray-500">ユーザーインタビュー用コンテキスト集</p>
                 </div>
               </Link>
             </div>
             
             <nav className="hidden md:flex items-center space-x-1">
-              <Link href="/" className="nav-item">
-                🏠 ホーム
-              </Link>
-              <button className="nav-item nav-item-active">
-                📝 サンプル
-              </button>
+              <button className="nav-item nav-item-active">🗂 コレクション</button>
+              <Link href="/create" className="nav-item">✍️ 作成</Link>
               <button className="nav-item">
                 ⭐ お気に入り
               </button>
@@ -145,28 +141,23 @@ const PersonaList: React.FC<PersonaListProps> = ({ personas }) => {
           <div className="text-center space-y-4">
             <div className="inline-flex items-center space-x-2 bg-white px-4 py-2 rounded-full shadow-soft">
               <span className="text-2xl">📚</span>
-              <span className="text-sm font-medium text-gray-700">
-                様々なペルソナサンプルをご用意
-              </span>
+              <span className="text-sm font-medium text-gray-700">ユーザーインタビューに使える文脈を多数収録</span>
             </div>
             
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
               <span className="bg-gradient-to-r from-mint-500 to-peach-500 bg-clip-text text-transparent">
-                サンプルペルソナ
+                ユーザーインタビュー用コンテキスト
               </span>
               コレクション
             </h2>
             
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              様々な職業・年代・性格のペルソナをご用意しました。
-              詳細情報やAI用プロンプトをすぐにお使いいただけます。
-            </p>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">対象ユーザー像・状況・制約・口調など、インタビューに必要な文脈をまとめたコンテキスト集です。すぐに使えるプロンプト付き。</p>
             
             {/* 統計情報 */}
             <div className="flex justify-center gap-8 pt-6">
               <div className="text-center">
                 <div className="text-2xl font-bold text-mint-600">{personas.length}</div>
-                <div className="text-sm text-gray-600">ペルソナ</div>
+                <div className="text-sm text-gray-600">コンテキスト</div>
               </div>
               <div className="text-center">
                 <div className="text-2xl font-bold text-peach-600">10+</div>
@@ -189,15 +180,13 @@ const PersonaList: React.FC<PersonaListProps> = ({ personas }) => {
               <User className="w-12 h-12 text-gray-400" />
             </div>
             <p className="text-gray-600 text-lg">
-              ペルソナデータが見つかりませんでした
+              コンテキストが見つかりませんでした
             </p>
           </div>
         ) : (
           <>
             <div className="flex justify-between items-center mb-8">
-              <h3 className="text-xl font-bold text-gray-900">
-                全{personas.length}件のペルソナ
-              </h3>
+              <h3 className="text-xl font-bold text-gray-900">全{personas.length}件のコンテキスト</h3>
               <div className="flex gap-2">
                 <button className="tag-category">
                   🎨 全て
@@ -227,14 +216,14 @@ const PersonaList: React.FC<PersonaListProps> = ({ personas }) => {
       <section className="bg-gradient-to-r from-mint-50 to-peach-50 py-12 mt-12">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <h3 className="text-2xl font-bold text-gray-900 mb-4">
-            あなたオリジナルのペルソナを作成しませんか？
+            あなたのケースに合わせてコンテキストを作成しませんか？
           </h3>
           <p className="text-gray-600 mb-6">
-            サンプルを参考に、あなただけのAIペルソナを簡単に作成できます
+            サンプルを参考に、あなただけのユーザーインタビュー用コンテキストを簡単に作成できます
           </p>
-          <Link href="/" className="btn-primary inline-flex items-center space-x-2">
+          <Link href="/create" className="btn-primary inline-flex items-center space-x-2">
             <Sparkles className="w-5 h-5" />
-            <span>ペルソナを作成する</span>
+            <span>コンテキストを作成する</span>
           </Link>
         </div>
       </section>

@@ -23,8 +23,8 @@ const SamplesPage: React.FC<SamplesPageProps> = ({ personas }) => {
   return (
     <>
       <Head>
-        <title>サンプルペルソナ | AIコンテキスト生成ツール</title>
-        <meta name="description" content="様々な職業・年代・性格のペルソナサンプル集。詳細情報やAI用プロンプトをご確認いただけます。" />
+        <title>コンテキストコレクション | ユーザーインタビュー用</title>
+        <meta name="description" content="ユーザーインタビューに使える高品質なコンテキスト集。職種・状況別のプロファイルとプロンプトを提供。" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <main className="min-h-screen bg-gray-50">

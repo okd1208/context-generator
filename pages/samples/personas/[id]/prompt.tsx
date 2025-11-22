@@ -58,11 +58,11 @@ const PromptPage: React.FC<PromptPageProps> = ({ persona, promptContent }) => {
           {/* ヘッダー */}
           <div className="mb-6">
             <Link
-              href="/samples"
+              href="/"
               className="inline-flex items-center text-blue-600 hover:text-blue-800 mb-4"
             >
               <ArrowLeft className="w-4 h-4 mr-2" />
-              サンプル一覧に戻る
+              コレクションに戻る
             </Link>
             
             <div className="bg-white rounded-lg shadow-md p-6 mb-6">
