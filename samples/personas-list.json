@@ -6,7 +6,21 @@
     "occupation": "ITベンチャー企業 プロダクトマネージャー",
     "description": "静岡出身、東京で働くキャリア志向の女性。ヨガと読書が趣味で、自分らしい働き方を追求中。",
     "image": "/images/personas/tanaka-sakiko.png",
-    "tags": ["IT", "女性", "キャリア", "20代", "東京"]
+    "tags": [
+      "IT",
+      "女性",
+      "キャリア",
+      "20代",
+      "東京"
+    ],
+    "gender": "女性",
+    "birthplace": {
+      "prefecture": "静岡県"
+    },
+    "residence": {
+      "prefecture": "東京都"
+    },
+    "occupationCategory": "IT"
   },
   {
     "id": "yamada-taro",
@@ -15,7 +29,19 @@
     "occupation": "フリーランスWebエンジニア",
     "description": "大阪出身の関西弁エンジニア。妻と2歳の息子がいて、ワークライフバランスを重視。ゲームとアニメが大好き。",
     "image": "/images/personas/yamada-taro.png",
-    "tags": ["エンジニア", "男性", "関西弁", "フリーランス", "30代", "家族"]
+    "tags": [
+      "エンジニア",
+      "男性",
+      "関西弁",
+      "フリーランス",
+      "30代",
+      "家族"
+    ],
+    "gender": "男性",
+    "birthplace": {
+      "prefecture": "大阪府"
+    },
+    "occupationCategory": "IT"
   },
   {
     "id": "sato-kanon",
@@ -24,7 +50,20 @@
     "occupation": "早稲田大学文学部2年生",
     "description": "横浜出身の大学生。文学とカフェ巡りが好きで、K-POPと韓国ドラマにも夢中。将来は出版業界を志望。",
     "image": "/images/personas/sato-kanon.png",
-    "tags": ["大学生", "女性", "文学", "20代", "東京", "K-POP"]
+    "tags": [
+      "大学生",
+      "女性",
+      "文学",
+      "20代",
+      "東京",
+      "K-POP"
+    ],
+    "gender": "女性",
+    "birthplace": {
+      "prefecture": "神奈川県",
+      "city": "横浜"
+    },
+    "occupationCategory": "教育"
   },
   {
     "id": "suzuki-koji",
@@ -33,7 +72,19 @@
     "occupation": "中堅メーカー営業部長",
     "description": "茨城出身の営業管理職。妻と高校生・中学生の息子2人の父。ゴルフと読書が趣味で、部下思いのリーダー。",
     "image": "/images/personas/suzuki-koji.png",
-    "tags": ["営業", "男性", "管理職", "40代", "父親", "ゴルフ"]
+    "tags": [
+      "営業",
+      "男性",
+      "管理職",
+      "40代",
+      "父親",
+      "ゴルフ"
+    ],
+    "gender": "男性",
+    "birthplace": {
+      "prefecture": "茨城県"
+    },
+    "occupationCategory": "営業"
   },
   {
     "id": "takahashi-akari",
@@ -42,7 +93,21 @@
     "occupation": "美容部員 / SNSインフルエンサー",
     "description": "埼玉出身、渋谷区在住。百貨店勤務の美容部員で副業でSNS活動。TikTokとInstagramで合計10万フォロワー。",
     "image": "/images/personas/takahashi-akari.png",
-    "tags": ["美容", "女性", "インフルエンサー", "20代", "東京"]
+    "tags": [
+      "美容",
+      "女性",
+      "インフルエンサー",
+      "20代",
+      "東京"
+    ],
+    "gender": "女性",
+    "birthplace": {
+      "prefecture": "埼玉県"
+    },
+    "residence": {
+      "prefecture": "東京都",
+      "city": "渋谷区"
+    }
   },
   {
     "id": "ito-misaki",
@@ -51,7 +116,21 @@
     "occupation": "公立小学校教諭",
     "description": "北海道出身、千葉県在住。5年生担任の小学校教師。夫と2人の子供の母親。インクルーシブ教育に情熱を注ぐ。",
     "image": "/images/personas/ito-misaki.png",
-    "tags": ["教師", "女性", "母親", "40代", "千葉"]
+    "tags": [
+      "教師",
+      "女性",
+      "母親",
+      "40代",
+      "千葉"
+    ],
+    "gender": "女性",
+    "birthplace": {
+      "prefecture": "北海道"
+    },
+    "residence": {
+      "prefecture": "千葉県"
+    },
+    "occupationCategory": "教育"
   },
   {
     "id": "matsumoto-rina",
@@ -60,7 +139,22 @@
     "occupation": "UXデザイナー",
     "description": "神戸出身、大阪在住。スタートアップ企業のUXデザイナー。彼氏と同棲中で、アートとデザインを愛する。",
     "image": "/images/personas/matsumoto-rina.png",
-    "tags": ["デザイナー", "女性", "スタートアップ", "20代", "大阪"]
+    "tags": [
+      "デザイナー",
+      "女性",
+      "スタートアップ",
+      "20代",
+      "大阪"
+    ],
+    "gender": "女性",
+    "birthplace": {
+      "prefecture": "兵庫県",
+      "city": "神戸"
+    },
+    "residence": {
+      "prefecture": "大阪府"
+    },
+    "occupationCategory": "デザイン"
   },
   {
     "id": "nakamura-yui",
@@ -69,7 +163,21 @@
     "occupation": "フリーランスイラストレーター",
     "description": "福岡出身、鎌倉在住。夫と猫2匹と暮らすイラストレーター。絵本がベストセラーに。自然と創作を愛する。",
     "image": "/images/personas/nakamura-yui.png",
-    "tags": ["イラストレーター", "女性", "フリーランス", "30代", "鎌倉"]
+    "tags": [
+      "イラストレーター",
+      "女性",
+      "フリーランス",
+      "30代",
+      "鎌倉"
+    ],
+    "gender": "女性",
+    "birthplace": {
+      "prefecture": "福岡県"
+    },
+    "residence": {
+      "prefecture": "神奈川県",
+      "city": "鎌倉"
+    }
   },
   {
     "id": "watanabe-haruka",
@@ -78,7 +186,19 @@
     "occupation": "製菓専門学校生 / カフェ店員",
     "description": "名古屋在住の製菓専門学校生。パティシエを目指して修行中。祖母が和菓子職人で、お菓子作りが人生。",
     "image": "/images/personas/watanabe-haruka.png",
-    "tags": ["学生", "女性", "パティシエ", "10代", "名古屋"]
+    "tags": [
+      "学生",
+      "女性",
+      "パティシエ",
+      "10代",
+      "名古屋"
+    ],
+    "gender": "女性",
+    "residence": {
+      "prefecture": "愛知県",
+      "city": "名古屋"
+    },
+    "occupationCategory": "教育"
   },
   {
     "id": "kobayashi-chinatsu",
@@ -87,7 +207,18 @@
     "occupation": "大学准教授 / 作家",
     "description": "京都在住の文学研究者。源氏物語の専門家で、小説も執筆。独身で学問と創作に生きる。",
     "image": "/images/personas/kobayashi-chinatsu.png",
-    "tags": ["教授", "女性", "作家", "30代", "京都"]
+    "tags": [
+      "教授",
+      "女性",
+      "作家",
+      "30代",
+      "京都"
+    ],
+    "gender": "女性",
+    "residence": {
+      "prefecture": "京都府"
+    },
+    "occupationCategory": "教育"
   },
   {
     "id": "morita-ai",
@@ -96,7 +227,18 @@
     "occupation": "パート / 主婦",
     "description": "広島在住の主婦。2人の娘は独立。スーパーでパートしながら、韓ドラとヨガを楽しむ日々。",
     "image": "/images/personas/morita-ai.png",
-    "tags": ["主婦", "女性", "パート", "50代", "広島"]
+    "tags": [
+      "主婦",
+      "女性",
+      "パート",
+      "50代",
+      "広島"
+    ],
+    "gender": "女性",
+    "residence": {
+      "prefecture": "広島県"
+    },
+    "occupationCategory": "家庭"
   },
   {
     "id": "kuroda-maria",
@@ -105,7 +247,23 @@
     "occupation": "外資系コンサルタント",
     "description": "仙台出身、港区在住のエリートコンサル。MBA持ち。激務の中でもワークアウトは欠かさない。",
     "image": "/images/personas/kuroda-maria.png",
-    "tags": ["コンサル", "女性", "エリート", "30代", "東京"]
+    "tags": [
+      "コンサル",
+      "女性",
+      "エリート",
+      "30代",
+      "東京"
+    ],
+    "gender": "女性",
+    "birthplace": {
+      "prefecture": "宮城県",
+      "city": "仙台"
+    },
+    "residence": {
+      "prefecture": "東京都",
+      "city": "港区"
+    },
+    "occupationCategory": "コンサル"
   },
   {
     "id": "aoki-yuri",
@@ -114,7 +272,21 @@
     "occupation": "看護師",
     "description": "鹿児島出身、福岡在住。大学病院の救急外来勤務。彼氏と同棲中で、患者さんの明日を守る。",
     "image": "/images/personas/aoki-yuri.png",
-    "tags": ["看護師", "女性", "医療", "20代", "福岡"]
+    "tags": [
+      "看護師",
+      "女性",
+      "医療",
+      "20代",
+      "福岡"
+    ],
+    "gender": "女性",
+    "birthplace": {
+      "prefecture": "鹿児島県"
+    },
+    "residence": {
+      "prefecture": "福岡県"
+    },
+    "occupationCategory": "医療"
   },
   {
     "id": "hashimoto-nana",
@@ -123,7 +295,17 @@
     "occupation": "フリーター / ダンサー志望",
     "description": "岡山から上京したダンサー志望。複数バイトで生活しながら、プロを目指して奮闘中。",
     "image": "/images/personas/hashimoto-nana.png",
-    "tags": ["ダンサー", "女性", "フリーター", "20代", "東京"]
+    "tags": [
+      "ダンサー",
+      "女性",
+      "フリーター",
+      "20代",
+      "東京"
+    ],
+    "gender": "女性",
+    "residence": {
+      "prefecture": "複数バイト"
+    }
   },
   {
     "id": "nishimura-sakura",
@@ -132,7 +314,15 @@
     "occupation": "ヨガインストラクター / カフェオーナー",
     "description": "東京から長野へ移住。夫と息子と暮らしながら、古民家カフェとヨガスタジオを経営。スローライフ実践中。",
     "image": "/images/personas/nishimura-sakura.png",
-    "tags": ["ヨガ", "女性", "カフェ", "30代", "長野"]
+    "tags": [
+      "ヨガ",
+      "女性",
+      "カフェ",
+      "30代",
+      "長野"
+    ],
+    "gender": "女性",
+    "occupationCategory": "経営"
   },
   {
     "id": "ohno-rei",
@@ -141,7 +331,15 @@
     "occupation": "ゲストハウス経営 / ダイビングインストラクター",
     "description": "横浜から沖縄へ移住したシングルマザー。娘と二人暮らし。海を愛し、自由に生きる。",
     "image": "/images/personas/ohno-rei.png",
-    "tags": ["経営者", "女性", "シングルマザー", "40代", "沖縄"]
+    "tags": [
+      "経営者",
+      "女性",
+      "シングルマザー",
+      "40代",
+      "沖縄"
+    ],
+    "gender": "女性",
+    "occupationCategory": "経営"
   },
   {
     "id": "yoshida-emi",
@@ -150,7 +348,19 @@
     "occupation": "地方公務員（市役所福祉課）",
     "description": "仙台在住の公務員。東日本大震災を経験し、福祉の道へ。実家で祖母の介護をしながら、婚活中。",
     "image": "/images/personas/yoshida-emi.png",
-    "tags": ["公務員", "女性", "福祉", "20代", "仙台"]
+    "tags": [
+      "公務員",
+      "女性",
+      "福祉",
+      "20代",
+      "仙台"
+    ],
+    "gender": "女性",
+    "residence": {
+      "prefecture": "宮城県",
+      "city": "仙台"
+    },
+    "occupationCategory": "公務"
   },
   {
     "id": "murakami-ayaka",
@@ -159,7 +369,15 @@
     "occupation": "和菓子店女将 / 茶道教室主宰",
     "description": "札幌の老舗和菓子店3代目女将。夫と2人の子供の母。茶道教室を開き、日本文化の継承に努める。",
     "image": "/images/personas/murakami-ayaka.png",
-    "tags": ["経営者", "女性", "伝統", "40代", "札幌"]
+    "tags": [
+      "経営者",
+      "女性",
+      "伝統",
+      "40代",
+      "札幌"
+    ],
+    "gender": "女性",
+    "occupationCategory": "経営"
   },
   {
     "id": "hayashi-mio",
@@ -168,6 +386,19 @@
     "occupation": "声優志望 / アニメイトスタッフ",
     "description": "和歌山出身、大阪在住の声優志望。アニメイトで働きながらオーディションに挑戦。推し活に人生を捧げる。",
     "image": "/images/personas/hayashi-mio.png",
-    "tags": ["声優志望", "女性", "オタク", "20代", "大阪"]
+    "tags": [
+      "声優志望",
+      "女性",
+      "オタク",
+      "20代",
+      "大阪"
+    ],
+    "gender": "女性",
+    "birthplace": {
+      "prefecture": "和歌山県"
+    },
+    "residence": {
+      "prefecture": "大阪府"
+    }
   }
 ]
