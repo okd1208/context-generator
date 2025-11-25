@@ -334,7 +334,10 @@ const PersonaList: React.FC<PersonaListProps> = ({ personas }) => {
             </div>
             {/* 性格・特徴の選択は未整備のため一旦未実装 */}
             <div className="flex gap-2 md:col-span-2 lg:col-span-4 justify-between items-center">
-              <span className="text-xs text-gray-500">条件は変更と同時に適用されます</span>
+              <div className="flex items-center gap-3 text-sm">
+                <span className="inline-flex items-center px-2 py-1 rounded-md bg-gray-100 text-gray-700">該当 {filtered.length} 件</span>
+                <span className="text-xs text-gray-500">条件は変更と同時に適用されます</span>
+              </div>
               <button className="btn-secondary h-10 px-3" onClick={resetFilters}>クリア</button>
             </div>
           </div>
